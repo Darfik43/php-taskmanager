@@ -7,4 +7,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/api/v1/auth/register', [AuthController::class, 'register']);
+Route::post('/api/v1/auth/register',
+    [AuthController::class, 'register']);
