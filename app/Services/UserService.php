@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\User;
 use App\Repositories\UserRepository;
 
 class UserService
@@ -13,7 +14,7 @@ class UserService
         $this->userRepository = $userRepository;
     }
 
-    public function createUser(array $data)
+    public function createUser(array $data): User
     {
         if (isset($data['password'])) {
             $data['password'] = bcrypt($data['password']);
