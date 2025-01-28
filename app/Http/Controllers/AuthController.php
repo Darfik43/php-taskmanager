@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SignupRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    public function register(Request $request) : User {
-        $incomingFields = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required', 'min:5', 'max:50'],
-            'passwordConfirmation' => ['required', 'min:5', 'max:50']
-        ]);
+    public function register(SignupRequest $signupRequest) : User {
+        $incomingFields = $signupRequest->validated();
 
         $incomingFields['password'] = bcrypt($incomingFields['password']);
 
