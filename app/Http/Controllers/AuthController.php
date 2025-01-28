@@ -3,13 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SignupRequest;
-use App\Models\User;
+use App\Http\Resources\UserResource;
+use App\Services\UserService;
+use Illuminate\Http\JsonResponse;
 
 class AuthController extends Controller
 {
-    public function register(SignupRequest $signupRequest) : User {
-        $signupRequest['password'] = bcrypt($signupRequest['password']);
+    private UserService $userService;
 
-        return User::create($signupRequest->validated());
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
+    public function register(SignupRequest $signupRequest) : JsonResponse {
+        $user = $this->userService->createUser($signupRequest->validated());
+
+        return response()->json(new UserResource($user), 201);
     }
 }
