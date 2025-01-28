@@ -2,7 +2,10 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Response;
+use Illuminate\Validation\ValidationException;
 
 class SignupRequest extends FormRequest
 {
@@ -27,4 +30,13 @@ class SignupRequest extends FormRequest
             'passwordConfirmation' => 'same:password'
         ];
     }
+
+    public function failedValidation(Validator $validator)
+    {
+        throw (new ValidationException($validator))
+            -> errorBag($this->errorBag)
+            -> redirectTo($this->getRedirectUrl())
+            -> status(  Response::HTTP_BAD_REQUEST);
+    }
+
 }
