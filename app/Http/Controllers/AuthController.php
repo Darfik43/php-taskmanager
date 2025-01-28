@@ -16,9 +16,10 @@ class AuthController extends Controller
         $this->userService = $userService;
     }
 
-    public function register(SignupRequest $signupRequest) : JsonResponse {
+    public function store(SignupRequest $signupRequest) : UserResource
+    {
         $user = $this->userService->createUser($signupRequest->validated());
 
-        return response()->json(new UserResource($user), 201);
+        return new UserResource($user);
     }
 }
