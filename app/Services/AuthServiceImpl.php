@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Services;
+
+use App\Repositories\UserRepository;
+use App\Exceptions\InvalidCredentialsException;
+use Tymon\JWTAuth\Facades\JWTAuth;
+
+class AuthServiceImpl implements AuthService
+{
+    public function __construct(
+        private readonly UserRepository $userRepository
+    ) {}
+
+    /**
+     * @throws InvalidCredentialsException
+     */
+    public function login(array $credentials): array
+    {
+        $user = $this->userRepository->findByEmail($credentials['email']);
+
+        if (!$user || bcrypt($credentials['password'] != $user->password)) {
+            throw new InvalidCredentialsException('Invalid credentials');
+        }
+
+        return $this->generateTokenResponse($user);
+    }
+
+    private function generateTokenResponse($user): array
+    {
+        $token = JWTAuth::fromUser($user);
+        $ttl = config('jwt.ttl');
+
+        return [
+            'user' => $user,
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => $ttl
+        ];
+    }
+}
