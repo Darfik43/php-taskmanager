@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Exceptions\InvalidCredentialsException;
 use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthServiceImpl implements AuthService
@@ -19,7 +20,7 @@ class AuthServiceImpl implements AuthService
     {
         $user = $this->userRepository->findByEmail($credentials['email']);
 
-        if (!$user || bcrypt($credentials['password'] != $user->password)) {
+        if (!$user || !Hash::check($credentials['password'], $user->password)) {
             throw new InvalidCredentialsException('Invalid credentials');
         }
 
