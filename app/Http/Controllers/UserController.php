@@ -5,9 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SignupRequest;
 use App\Http\Resources\UserResource;
 use App\Services\UserService;
-use Illuminate\Http\JsonResponse;
 
-class AuthController extends Controller
+class UserController extends Controller
 {
     private UserService $userService;
 
