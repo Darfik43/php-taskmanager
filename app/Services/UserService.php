@@ -3,13 +3,13 @@
 namespace App\Services;
 
 use App\Models\User;
-use App\Repositories\UserRepository;
+use App\Repositories\UserRepositoryImpl;
 
 class UserService
 {
-    private UserRepository $userRepository;
+    private UserRepositoryImpl $userRepository;
 
-    public function __construct(UserRepository $userRepository)
+    public function __construct(UserRepositoryImpl $userRepository)
     {
         $this->userRepository = $userRepository;
     }

@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Repositories\UserRepository;
 use App\Exceptions\InvalidCredentialsException;
+use App\Repositories\UserRepository;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthServiceImpl implements AuthService
