@@ -24,7 +24,7 @@ class AuthController extends Controller
             $response = $this->authService->login($loginRequest->validated());
             return new AuthResource($response);
         } catch (InvalidCredentialsException $e) {
-            throw $e; //TODO Mocked logic of throwing
+            throw $e; //TODO Mocked logic of throwing need to be handled somewhere, now we throw exception in service and here
         }
     }
 }
