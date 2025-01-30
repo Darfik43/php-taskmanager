@@ -6,7 +6,7 @@ use Closure;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class Middleware
+class JwtMiddleware
 {
     public function handle($request, Closure $next)
     {
