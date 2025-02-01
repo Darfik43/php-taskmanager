@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SignupRequest;
 use App\Http\Resources\UserResource;
-use App\Services\UserService;
+use App\Services\UserServiceImpl;
 
 class UserController extends Controller
 {
-    public function __construct(private readonly UserService $userService)
+    public function __construct(private readonly UserServiceImpl $userService)
     {}
 
     public function store(SignupRequest $signupRequest) : UserResource
