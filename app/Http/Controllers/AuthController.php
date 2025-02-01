@@ -28,6 +28,9 @@ class AuthController extends Controller
         }
     }
 
+    /**
+     * @throws InvalidCredentialsException
+     */
     public function refresh(Request $request): AuthResource {
         try {
             $response = $this->authService->refresh($request->validated());
