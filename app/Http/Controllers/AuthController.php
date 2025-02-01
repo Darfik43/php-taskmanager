@@ -6,7 +6,6 @@ use App\Exceptions\InvalidCredentialsException;
 use App\Http\Requests\LoginRequest;
 use App\Http\Resources\AuthResource;
 use App\Services\AuthService;
-use App\Services\UserService;
 
 class AuthController extends Controller
 {
