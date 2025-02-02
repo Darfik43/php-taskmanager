@@ -14,5 +14,5 @@ Route::prefix('auth')->group(function (){
 });
 
 Route::middleware([JwtMiddleware::class])->group(function () {
-   Route::post('tasks', [TaskController::class, 'store']);
+   Route::apiResource('tasks', TaskController::class);
 });
