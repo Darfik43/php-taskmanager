@@ -24,7 +24,7 @@ class TaskRequest extends FormRequest
         return [
             'title' => 'required|min:3',
             'details' => 'required|min:3',
-            'isChecked' => 'required|min:3',
+            'isChecked' => 'required',
         ];
     }
 }
