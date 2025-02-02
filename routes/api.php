@@ -14,5 +14,5 @@ Route::prefix('auth')->group(function (){
 });
 
 Route::middleware([JwtMiddleware::class])->group(function () {
-   //TODO add routes that must be protected
+   Route::post('tasks', [TaskController::class, 'store']);
 });
