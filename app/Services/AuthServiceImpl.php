@@ -39,4 +39,11 @@ class AuthServiceImpl implements AuthService
             'expires_in' => $ttl
         ];
     }
+
+    private function generateRefreshResponse($user): string
+    {
+        return JWTAuth::customClaims([
+            'exp' => now()->addMinutes(config('jwt.refresh_ttl'))
+                ->timestamp])->fromUser($user);
+    }
 }
