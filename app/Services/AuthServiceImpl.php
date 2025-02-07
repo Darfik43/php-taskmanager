@@ -29,12 +29,14 @@ class AuthServiceImpl implements AuthService
 
     private function generateTokenResponse($user): array
     {
-        $token = JWTAuth::fromUser($user);
+        $accessToken = JWTAuth::fromUser($user);
         $ttl = config('jwt.ttl');
+        $refreshToken = $this->generateRefreshResponse($user);
 
         return [
             'user' => $user,
-            'access_token' => $token,
+            'access_token' => $accessToken,
+            'refresh_token' => $refreshToken,
             'token_type' => 'bearer',
             'expires_in' => $ttl
         ];
