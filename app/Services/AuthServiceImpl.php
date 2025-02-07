@@ -27,6 +27,7 @@ class AuthServiceImpl implements AuthService
         return $this->generateTokenResponse($user);
     }
 
+    //TODO separate method to generate response/generate tokens
     private function generateTokenResponse($user): array
     {
         $accessToken = JWTAuth::fromUser($user);
