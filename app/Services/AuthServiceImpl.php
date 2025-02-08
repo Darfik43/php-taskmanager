@@ -49,4 +49,9 @@ class AuthServiceImpl implements AuthService
             'exp' => now()->addMinutes(config('jwt.refresh_ttl'))
                 ->timestamp])->fromUser($user);
     }
+
+    private function generateAccessToken()
+    {
+
+    }
 }
