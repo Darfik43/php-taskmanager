@@ -5,12 +5,12 @@ namespace App\Services;
 use App\Exceptions\InvalidCredentialsException;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Hash;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthServiceImpl implements AuthService
 {
     public function __construct(
-        private readonly UserRepository $userRepository
+        private readonly UserRepository $userRepository,
+        private readonly JWTService $jwtService
     ) {}
 
     /**
@@ -24,8 +24,6 @@ class AuthServiceImpl implements AuthService
             throw new InvalidCredentialsException('Invalid credentials');
         }
 
-        return $this->generateTokenResponse($user);
+        return $this->jwtService->generateTokens($user);
     }
-
-    //TODO separate method to generate response/generate tokens
 }
