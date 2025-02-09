@@ -12,6 +12,36 @@ class JWTServiceImpl implements JWTService
         // TODO: Implement generateTokens() method.
     }
 
+    private function generateTokenResponse($user): array
+    {
+        $accessToken = JWTAuth::fromUser($user);
+        $ttl = config('jwt.ttl');
+        $refreshToken = $this->generateRefreshResponse($user);
 
+        return [
+            'user' => $user,
+            'access_token' => $accessToken,
+            'refresh_token' => $refreshToken,
+            'token_type' => 'bearer',
+            'expires_in' => $ttl
+        ];
+    }
+
+    private function generateRefreshResponse($user): string
+    {
+        return JWTAuth::customClaims([
+            'exp' => now()->addMinutes(config('jwt.refresh_ttl'))
+                ->timestamp])->fromUser($user);
+    }
+
+    private function generateAccessToken()
+    {
+
+    }
+
+    private function storeRefreshToken()
+    {
+
+    }
 
 }
