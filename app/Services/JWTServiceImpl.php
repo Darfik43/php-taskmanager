@@ -14,7 +14,13 @@ class JWTServiceImpl implements JWTService
 
     public function generateTokens($user): array
     {
-        $accessToken =
+        $accessToken = $this->generateAccessToken($user);
+        $refreshToken = $this->generateRefreshToken($user);
+
+        return [
+            'access_token' => $accessToken,
+            'refresh_token' => $refreshToken,
+        ];
     }
 
     private function generateTokenResponse($user): array
@@ -46,7 +52,7 @@ class JWTServiceImpl implements JWTService
 
     private function storeRefreshToken()
     {
-
+        //TODO create entity for refresh token and implement storing here
     }
 
 }
