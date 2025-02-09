@@ -9,7 +9,7 @@ class JWTServiceImpl implements JWTService
 
     public function generateTokens($user): array
     {
-        // TODO: Implement generateTokens() method.
+        $accessToken =
     }
 
     private function generateTokenResponse($user): array
@@ -34,9 +34,9 @@ class JWTServiceImpl implements JWTService
                 ->timestamp])->fromUser($user);
     }
 
-    private function generateAccessToken()
+    private function generateAccessToken($user)
     {
-
+        return $refreshToken = JWTAuth::fromUser($user);
     }
 
     private function storeRefreshToken()
