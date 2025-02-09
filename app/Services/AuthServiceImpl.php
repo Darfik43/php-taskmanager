@@ -55,7 +55,7 @@ class AuthServiceImpl implements AuthService
 
     }
 
-    private function storeAccessToken()
+    private function storeRefreshToken()
     {
 
     }
