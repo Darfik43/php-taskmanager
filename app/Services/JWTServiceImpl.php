@@ -2,10 +2,15 @@
 
 namespace App\Services;
 
+use App\Repositories\RefreshTokenRepository;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class JWTServiceImpl implements JWTService
 {
+
+    public function __construct(
+       private readonly RefreshTokenRepository $refreshTokenRepository
+    ){}
 
     public function generateTokens($user): array
     {
