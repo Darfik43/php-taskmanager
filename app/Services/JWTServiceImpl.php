@@ -16,7 +16,7 @@ class JWTServiceImpl implements JWTService
     {
         $accessToken = JWTAuth::fromUser($user);
         $ttl = config('jwt.ttl');
-        $refreshToken = $this->generateRefreshResponse($user);
+        $refreshToken = $this->generateRefreshToken($user);
 
         return [
             'user' => $user,
@@ -27,7 +27,7 @@ class JWTServiceImpl implements JWTService
         ];
     }
 
-    private function generateRefreshResponse($user): string
+    private function generateRefreshToken($user): string
     {
         return JWTAuth::customClaims([
             'exp' => now()->addMinutes(config('jwt.refresh_ttl'))
