@@ -2,10 +2,14 @@
 
 namespace App\Providers;
 
+use App\Repositories\RefreshTokenRepository;
+use App\Repositories\RefreshTokenRepositoryImpl;
 use App\Repositories\UserRepository;
 use App\Repositories\UserRepositoryImpl;
 use App\Services\AuthService;
 use App\Services\AuthServiceImpl;
+use App\Services\JWTService;
+use App\Services\JWTServiceImpl;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -17,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(UserRepository::class, UserRepositoryImpl::class);
         $this->app->bind(AuthService::class, AuthServiceImpl::class);
+        $this->app->bind(JWTService::class, JWTServiceImpl::class);
+        $this->app->bind(RefreshTokenRepository::class, RefreshTokenRepositoryImpl::class);
     }
 
     /**
