@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('refresh_tokens', function (Blueprint $table) {
             $table->id();
             $table->string('token');
+            $table->timestamp('created_at');
             $table->timestamp('expires_at');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
