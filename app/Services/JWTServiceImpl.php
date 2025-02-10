@@ -16,6 +16,7 @@ class JWTServiceImpl implements JWTService
     {
         $accessToken = $this->generateAccessToken($user);
         $refreshToken = $this->generateRefreshToken($user);
+        $this->storeRefreshToken($refreshToken);
 
         return [
             'access_token' => $accessToken,
@@ -50,9 +51,9 @@ class JWTServiceImpl implements JWTService
         return $refreshToken = JWTAuth::fromUser($user);
     }
 
-    private function storeRefreshToken()
+    private function storeRefreshToken($refreshToken)
     {
-        //TODO create entity for refresh token and implement storing here
+
     }
 
     //TODO methods to update refresh, delete refresh, check refresh
