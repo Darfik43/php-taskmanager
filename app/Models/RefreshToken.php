@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $token
@@ -27,8 +27,8 @@ class RefreshToken extends Model
     use HasFactory;
     protected $fillable = [
         'token',
-        'userId',
-        'createdAt',
-        'expiresAt'
+        'user_id',
+        'created_at',
+        'expires_at'
     ];
 }
