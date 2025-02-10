@@ -25,10 +25,13 @@ use Illuminate\Database\Eloquent\Model;
 class RefreshToken extends Model
 {
     use HasFactory;
+
+    public $timestamps = false;
+
     protected $fillable = [
         'token',
-        'user_id',
         'created_at',
-        'expires_at'
+        'expires_at',
+        'user_id'
     ];
 }
