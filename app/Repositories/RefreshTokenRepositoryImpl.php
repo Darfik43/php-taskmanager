@@ -2,12 +2,14 @@
 
 namespace App\Repositories;
 
+use App\Models\RefreshToken;
+
 class RefreshTokenRepositoryImpl implements RefreshTokenRepository
 {
 
-    public function create(string $token)
+    public function create(array $token)
     {
-        // TODO: Implement create() method.
+        RefreshToken::create($token);
     }
 
     public function find(string $token)
