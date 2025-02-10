@@ -7,13 +7,13 @@ use App\Models\RefreshToken;
 class RefreshTokenRepositoryImpl implements RefreshTokenRepository
 {
 
-    public function create(array $token)
+    public function create(array $token): void
     {
         RefreshToken::create($token);
     }
 
-    public function find(string $token)
+    public function find(string $token): ?RefreshToken
     {
-        // TODO: Implement find() method.
+        return null; // TODO: Implement find() method.
     }
 }
