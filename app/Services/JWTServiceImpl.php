@@ -52,4 +52,5 @@ class JWTServiceImpl implements JWTService
     }
 
     //TODO methods to update refresh, delete refresh, check refresh
+    //TODO specify data types for params and returns
 }
