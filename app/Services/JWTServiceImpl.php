@@ -3,14 +3,17 @@
 namespace App\Services;
 
 use App\Repositories\RefreshTokenRepository;
+use Carbon\Carbon;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class JWTServiceImpl implements JWTService
 {
 
     public function __construct(
-       private readonly RefreshTokenRepository $refreshTokenRepository
-    ){}
+        private readonly RefreshTokenRepository $refreshTokenRepository
+    )
+    {
+    }
 
     public function generateTokens($user): array
     {
@@ -51,9 +54,16 @@ class JWTServiceImpl implements JWTService
         return $refreshToken = JWTAuth::fromUser($user);
     }
 
-    private function storeRefreshToken($refreshToken)
+    private function storeRefreshToken($refreshToken): void
     {
+        $refreshArray = JWTAuth::setToken($refreshToken)->getPayload()->toArray();
 
+        $this->refreshTokenRepository->create([
+            'token' => $refreshToken,
+            'created_at' => Carbon::createFromTimestamp($refreshArray['iat'])->toDateTimeString(),
+            'expires_at' => Carbon::createFromTimestamp($refreshArray['exp'])->toDateTimeString(),
+            'user_id' => $refreshArray['sub']
+        ]);
     }
 
     //TODO methods to update refresh, delete refresh, check refresh
