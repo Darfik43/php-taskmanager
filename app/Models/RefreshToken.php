@@ -10,6 +10,8 @@ class RefreshToken extends Model
     use HasFactory;
     protected $fillable = [
         'token',
-        'userId'
+        'userId',
+        'createdAt',
+        'expiresAt'
     ];
 }
