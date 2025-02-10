@@ -4,6 +4,6 @@ namespace App\Repositories;
 
 interface RefreshTokenRepository
 {
-    public function create(string $token);
+    public function create(array $token);
     public function find(string $token);
 }
