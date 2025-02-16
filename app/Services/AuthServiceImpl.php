@@ -29,6 +29,6 @@ class AuthServiceImpl implements AuthService
 
     public function refreshTokens(string $token): array
     {
-
+        return $this->jwtService->refreshTokens($token);
     }
 }
