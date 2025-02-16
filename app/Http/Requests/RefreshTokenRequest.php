@@ -22,7 +22,7 @@ class RefreshTokenRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'refreshToken' => 'required'
         ];
     }
 }
