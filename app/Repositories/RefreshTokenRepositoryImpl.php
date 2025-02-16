@@ -16,4 +16,9 @@ class RefreshTokenRepositoryImpl implements RefreshTokenRepository
     {
         return RefreshToken::where('token', $token);
     }
+
+    public function delete(string $token): void
+    {
+        RefreshToken::where('token', $token)->delete();
+    }
 }
