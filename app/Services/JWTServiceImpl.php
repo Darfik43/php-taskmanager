@@ -2,8 +2,10 @@
 
 namespace App\Services;
 
+use App\Exceptions\InvalidTokenException;
 use App\Repositories\RefreshTokenRepository;
 use Carbon\Carbon;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class JWTServiceImpl implements JWTService
@@ -27,9 +29,17 @@ class JWTServiceImpl implements JWTService
         ];
     }
 
-    public function refreshTokens(string $token): array
+    /**
+     * @throws InvalidTokenException
+     */
+    public function refreshTokens(string $token, JWTSubject $user): array
     {
-        return array();
+        if ($this->isRefreshStored($token)) {
+            $this->refreshTokenRepository->delete($token);
+            return $this->generateTokens($user);
+        } else {
+            throw new InvalidTokenException("Token not found. Probably it was already used");
+        }
     }
 
     private function generateRefreshToken($user): string
