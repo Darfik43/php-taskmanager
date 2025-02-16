@@ -27,6 +27,11 @@ class JWTServiceImpl implements JWTService
         ];
     }
 
+    public function refreshTokens(string $token): array
+    {
+        return array();
+    }
+
     private function generateRefreshToken($user): string
     {
         return JWTAuth::customClaims([
