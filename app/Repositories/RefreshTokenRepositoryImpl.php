@@ -14,6 +14,6 @@ class RefreshTokenRepositoryImpl implements RefreshTokenRepository
 
     public function findByToken(string $token): ?RefreshToken
     {
-        RefreshToken::findByToken()
+        return RefreshToken::where('token', $token);
     }
 }
