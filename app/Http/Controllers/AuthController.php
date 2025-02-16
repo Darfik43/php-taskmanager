@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\InvalidCredentialsException;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RefreshTokenRequest;
 use App\Http\Resources\AuthResource;
 use App\Services\AuthService;
-use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
@@ -31,9 +31,10 @@ class AuthController extends Controller
     /**
      * @throws InvalidCredentialsException
      */
-    public function refresh(Request $request): AuthResource {
+    public function refresh(RefreshTokenRequest $request): AuthResource
+    {
         try {
-            $response = $this->authService->refresh($request->validated());
+            $response = $this->authService->refreshTokens($request->validated()['refreshToken']);
             return new AuthResource($response);
         } catch (InvalidCredentialsException $e) {
             throw $e; //TODO Mocked logic of throwing need to be handled somewhere, now we throw exception in service and here
