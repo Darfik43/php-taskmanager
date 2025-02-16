@@ -12,8 +12,8 @@ class RefreshTokenRepositoryImpl implements RefreshTokenRepository
         RefreshToken::create($token);
     }
 
-    public function find(string $token): ?RefreshToken
+    public function findByToken(string $token): ?RefreshToken
     {
-        return null; // TODO: Implement find() method.
+        RefreshToken::findByToken()
     }
 }
