@@ -3,8 +3,10 @@
 namespace App\Services;
 
 use App\Exceptions\InvalidCredentialsException;
+use App\Exceptions\InvalidTokenException;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Hash;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthServiceImpl implements AuthService
 {
@@ -27,8 +29,15 @@ class AuthServiceImpl implements AuthService
         return $this->jwtService->generateTokens($user);
     }
 
+    /**
+     * @throws InvalidTokenException
+     */
     public function refreshTokens(string $token): array
     {
-        return $this->jwtService->refreshTokens($token);
+        if (JWTAuth::setToken($token)->authenticate()) {
+            return $this->jwtService->refreshTokens($token);
+        } else {
+            throw new InvalidTokenException("Invalid token");
+        }
     }
 }
