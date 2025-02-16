@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Exceptions\InvalidTokenException;
 use App\Repositories\RefreshTokenRepository;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Redis;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -64,6 +65,11 @@ class JWTServiceImpl implements JWTService
             'expires_at' => Carbon::createFromTimestamp($refreshArray['exp'])->toDateTimeString(),
             'user_id' => $refreshArray['sub']
         ]);
+          //TODO Create repo for redis implementation. Don't keep logic given below in the service
+//        $redis = Redis::connection(); // This should be in constructor
+//        $userId = $refreshArray['sub'];
+//        $key = "refresh_token:{$userId}";
+//        $redis->set($key, $refreshToken);
     }
 
     private function isRefreshStored(string $token): bool
