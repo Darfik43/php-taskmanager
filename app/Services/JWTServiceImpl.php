@@ -39,7 +39,7 @@ class JWTServiceImpl implements JWTService
                 ->timestamp])->fromUser($user);
     }
 
-    private function generateAccessToken($user)
+    private function generateAccessToken($user): string
     {
         return JWTAuth::fromUser($user);
     }
