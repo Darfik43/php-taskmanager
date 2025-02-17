@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\RefreshToken;
 
-class RefreshTokenRepositoryImpl implements RefreshTokenRepository
+class SQLRefreshTokenRepository implements RefreshTokenRepository
 {
 
     public function create(array $token): void
