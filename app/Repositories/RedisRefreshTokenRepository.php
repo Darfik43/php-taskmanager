@@ -15,7 +15,12 @@ class RedisRefreshTokenRepository implements RefreshTokenRepository
 
     public function create(array $token): void
     {
-        // TODO: Implement create() method.
+        $this->redis->hmset(
+            $token['user_id'],
+            [
+
+            ]
+        );
     }
 
     public function findByToken(string $token): ?RefreshToken
