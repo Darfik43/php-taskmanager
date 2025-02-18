@@ -58,7 +58,7 @@ class JWTServiceImpl implements JWTService
 
     private function storeRefreshToken($refreshToken): void
     {
-        $refreshArray = JWTAuth::setToken($refreshToken)->getPayload()->toArray();
+        $refreshArray = $this->getTokenPayloadAsArray($refreshToken);
 
         $this->refreshTokenRepository->create([
             'token' => $refreshToken,
@@ -80,6 +80,11 @@ class JWTServiceImpl implements JWTService
     private function isRefreshExpired(string $token): bool
     {
         return $token['exp'] >
+    }
+
+    private function getTokenPayloadAsArray(string $token): array
+    {
+        return JWTAuth::setToken($token)->getPayload()->toArray();
     }
     //TODO isRefreshExpired method to compare and validate token(Isn't it validated here? $user = JWTAuth::parseToken()->authenticate();)
 }
