@@ -28,13 +28,13 @@ class RedisRefreshTokenRepository implements RefreshTokenRepository
 
     public function findByToken(string $token): ?RefreshToken
     {
-        $tokenData = $this->redis->hgetall($token);
+        $tokenData = $this->redis->hgetall("refresh_token:{$token}");
         if (empty($tokenData)) {
             return null;
         }
 
         return new RefreshToken([
-            'token' => $tokenData['token'],
+            'token' => $token,
             'created_at' => $tokenData['created_at'],
             'expires_at' => $tokenData['expires_at'],
             'user_id'  => $tokenData['user_id']
