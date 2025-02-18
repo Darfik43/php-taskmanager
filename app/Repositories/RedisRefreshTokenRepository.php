@@ -43,6 +43,6 @@ class RedisRefreshTokenRepository implements RefreshTokenRepository
 
     public function delete(string $token): void
     {
-        $this->redis->del($token);
+        $this->redis->del("refresh_token:{$token}");
     }
 }
