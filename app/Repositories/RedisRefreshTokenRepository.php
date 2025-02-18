@@ -3,11 +3,12 @@
 namespace App\Repositories;
 
 use App\Models\RefreshToken;
+use Illuminate\Redis\Connections\Connection;
 use Illuminate\Support\Facades\Redis;
 
 class RedisRefreshTokenRepository implements RefreshTokenRepository
 {
-    private $redis;
+    private Connection $redis;
     public function __construct()
     {
         $this->redis = Redis::connection();
