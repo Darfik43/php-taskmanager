@@ -6,8 +6,6 @@ use App\Exceptions\InvalidTokenException;
 use App\Models\RefreshToken;
 use App\Repositories\RefreshTokenRepository;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Redis;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
