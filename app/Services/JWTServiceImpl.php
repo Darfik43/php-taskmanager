@@ -76,5 +76,10 @@ class JWTServiceImpl implements JWTService
         return $this->refreshTokenRepository->findByToken($token)
             ?? throw new InvalidTokenException('Token not found');
     }
+
+    private function isRefreshExpired(string $token): bool
+    {
+        return $token['exp'] >
+    }
     //TODO isRefreshExpired method to compare and validate token(Isn't it validated here? $user = JWTAuth::parseToken()->authenticate();)
 }
