@@ -6,6 +6,7 @@ use App\Exceptions\InvalidTokenException;
 use App\Models\RefreshToken;
 use App\Repositories\RefreshTokenRepository;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -34,7 +35,7 @@ class JWTServiceImpl implements JWTService
     /**
      * @throws InvalidTokenException
      */
-    public function refreshTokens(string $token, JWTSubject $user): array
+    public function refreshTokens(string $token, JWTSubject $user): array //TODO $user may be deleted I think6 we can get it simply from token
     {
         if ($this->getRefreshTokenByToken($token) && $this->isRefreshExpired($token)) {
             $this->refreshTokenRepository->delete($token);
