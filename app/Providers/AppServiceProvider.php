@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Repositories\RedisRefreshTokenRepository;
 use App\Repositories\RefreshTokenRepository;
 use App\Repositories\SQLRefreshTokenRepository;
 use App\Repositories\UserRepository;
@@ -22,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UserRepository::class, UserRepositoryImpl::class);
         $this->app->bind(AuthService::class, AuthServiceImpl::class);
         $this->app->bind(JWTService::class, JWTServiceImpl::class);
-        $this->app->bind(RefreshTokenRepository::class, SQLRefreshTokenRepository::class);
+        $this->app->bind(RefreshTokenRepository::class, RedisRefreshTokenRepository::class);
     }
 
     /**
