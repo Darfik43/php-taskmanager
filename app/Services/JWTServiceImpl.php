@@ -20,7 +20,7 @@ class JWTServiceImpl implements JWTService
     {
     }
 
-    public function generateTokens($user): array
+    public function generateTokens($user): array //TODO Split it into 2 methods, generate must be only generating method with no included of storing logic
     {
         $accessToken = $this->generateAccessToken($user);
         $refreshToken = $this->generateRefreshToken($user);
