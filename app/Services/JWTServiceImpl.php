@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Exceptions\InvalidTokenException;
+use App\Models\RefreshToken;
 use App\Repositories\RefreshTokenRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Redis;
@@ -76,5 +77,13 @@ class JWTServiceImpl implements JWTService
         }
     }
 
+    /**
+     * @throws InvalidTokenException
+     */
+    private function getRefreshTokenByToken(string $token): RefreshToken
+    {
+        return $this->refreshTokenRepository->findByToken($token)
+            ?? throw new InvalidTokenException('Token not found');
+    }
     //TODO isRefreshExpired method to compare and validate token(Isn't it validated here? $user = JWTAuth::parseToken()->authenticate();)
 }
