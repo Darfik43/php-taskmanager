@@ -68,15 +68,6 @@ class JWTServiceImpl implements JWTService
         ]);
     }
 
-    private function isRefreshStored(string $token): bool
-    {
-        if ($this->refreshTokenRepository->findByToken($token)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     /**
      * @throws InvalidTokenException
      */
