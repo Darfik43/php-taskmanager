@@ -36,7 +36,7 @@ class JWTServiceImpl implements JWTService
      */
     public function refreshTokens(string $token, JWTSubject $user): array
     {
-        if ($this->isRefreshStored($token)) {
+        if ($this->getRefreshTokenByToken($token)) {
             $this->refreshTokenRepository->delete($token);
             return $this->generateTokens($user);
         } else {
