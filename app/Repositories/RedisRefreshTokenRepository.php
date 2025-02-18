@@ -19,7 +19,7 @@ class RedisRefreshTokenRepository implements RefreshTokenRepository
         $this->redis->hmset(
             "refresh_token:{$token['token']}",
             [
-                'token' => $token['user_id'],
+                'user_id' => $token['user_id'],
                 'created_at' => $token['created_at'],
                 'expires_at' => $token['expires_at']
             ]
