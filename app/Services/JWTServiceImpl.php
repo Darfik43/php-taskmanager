@@ -79,7 +79,7 @@ class JWTServiceImpl implements JWTService
 
     private function isRefreshExpired(string $token): bool
     {
-        return $this->getTokenPayloadAsArray($token)['exp'] > now() ?? false;
+        return $this->getTokenPayloadAsArray($token)['exp'] > now()->timestamp;
     }
 
     private function getTokenPayloadAsArray(string $token): array
