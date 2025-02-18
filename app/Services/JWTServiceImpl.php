@@ -86,5 +86,4 @@ class JWTServiceImpl implements JWTService
     {
         return JWTAuth::setToken($token)->getPayload()->toArray();
     }
-    //TODO isRefreshExpired method to compare and validate token(Isn't it validated here? $user = JWTAuth::parseToken()->authenticate();)
 }
