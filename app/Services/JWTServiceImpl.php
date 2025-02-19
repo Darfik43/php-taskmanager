@@ -32,9 +32,6 @@ class JWTServiceImpl implements JWTService
         ];
     }
 
-    /**
-     * @throws InvalidTokenException
-     */
     public function refreshTokens(string $token): array
     {
         if (!$this->isRefreshExpired($token)) {
