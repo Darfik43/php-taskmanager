@@ -6,6 +6,7 @@ use App\Exceptions\InvalidCredentialsException;
 use App\Exceptions\InvalidTokenException;
 use App\Repositories\UserRepository;
 use Illuminate\Support\Facades\Hash;
+use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthServiceImpl implements AuthService
@@ -28,10 +29,10 @@ class AuthServiceImpl implements AuthService
 
     public function refreshTokens(string $token): array
     {
-        $user = JWTAuth::setToken($token)->authenticate();
-        if ($user) {
+        try {
+            $user = JWTAuth::setToken($token)->parseToken()->authenticate();
             return $this->jwtService->refreshTokens($token, $user);
-        } else {
+        } catch (JWTException $e) {
             throw new InvalidTokenException("Invalid token");
         }
     }
