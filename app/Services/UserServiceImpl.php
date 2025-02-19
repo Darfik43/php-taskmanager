@@ -21,9 +21,6 @@ class UserServiceImpl implements UserService
         return $this->userRepository->create($data);
     }
 
-    /**
-     * @throws UserNotFoundException
-     */
     public function getUserById(int $id): User
     {
         return $this->userRepository->findById($id)
