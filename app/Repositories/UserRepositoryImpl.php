@@ -15,4 +15,9 @@ class UserRepositoryImpl implements UserRepository
     {
         return User::create($data);
     }
+
+    public function findById(int $id): ?User
+    {
+        return User::where('id', $id)->first();
+    }
 }
