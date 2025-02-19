@@ -15,9 +15,7 @@ class AuthServiceImpl implements AuthService
         private readonly JWTService $jwtService
     ) {}
 
-    /**
-     * @throws InvalidCredentialsException
-     */
+
     public function login(array $credentials): array
     {
         $user = $this->userRepository->findByEmail($credentials['email']);
