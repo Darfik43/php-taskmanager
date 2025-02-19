@@ -22,6 +22,7 @@ class JWTServiceImpl implements JWTService
     {
         $accessToken = $this->generateAccessToken($user);
         $refreshToken = $this->generateRefreshToken($user);
+
         $this->storeRefreshToken($refreshToken);
 
         return [
