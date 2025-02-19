@@ -15,7 +15,6 @@ class AuthServiceImpl implements AuthService
         private readonly JWTService $jwtService
     ) {}
 
-
     public function login(array $credentials): array
     {
         $user = $this->userRepository->findByEmail($credentials['email']);
@@ -27,9 +26,6 @@ class AuthServiceImpl implements AuthService
         return $this->jwtService->generateTokens($user);
     }
 
-    /**
-     * @throws InvalidTokenException
-     */
     public function refreshTokens(string $token): array
     {
         $user = JWTAuth::setToken($token)->authenticate();
