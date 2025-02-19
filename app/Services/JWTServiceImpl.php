@@ -17,8 +17,7 @@ class JWTServiceImpl implements JWTService
     )
     {
     }
-//TODO Экспешены нужны на возможных этапах при невалидных токенах;
-//TODO Добавить типы во всех методах
+
     public function generateTokens(JWTSubject $user): array //TODO Split it into 2 methods, generate must be only generating method with no included of storing logic
     {
         $accessToken = $this->generateAccessToken($user);
