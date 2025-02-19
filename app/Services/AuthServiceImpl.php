@@ -34,11 +34,6 @@ class AuthServiceImpl implements AuthService
      */
     public function refreshTokens(string $token): array
     {
-        $user = JWTAuth::setToken($token)->authenticate();
-        if ($user) {
-            return $this->jwtService->refreshTokens($token, $user);
-        } else {
-            throw new InvalidTokenException("Invalid token");
-        }
+        return $this->jwtService->refreshTokens($token);
     }
 }
