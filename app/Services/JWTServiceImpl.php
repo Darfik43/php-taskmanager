@@ -13,8 +13,7 @@ class JWTServiceImpl implements JWTService
 {
 
     public function __construct(
-        private readonly RefreshTokenRepository $refreshTokenRepository,
-        private readonly UserService $userService
+        private readonly RefreshTokenRepository $refreshTokenRepository
     )
     {
     }
@@ -32,17 +31,13 @@ class JWTServiceImpl implements JWTService
         ];
     }
 
-    public function refreshTokens(string $token): array
+    public function refreshTokens(string $token, JWTSubject $user): array
     {
-        if (!$this->isRefreshExpired($token)) {
-            $userId = $this->getRefreshTokenByToken($token)['user_id'];
+        if ($this->getRefreshTokenByToken($token) && $this->isRefreshExpired($token)) {
             $this->refreshTokenRepository->delete($token);
-
-            return $this->generateTokens(
-                $this->userService->getUserById($userId)
-            );
+            return $this->generateTokens($user);
         } else {
-            throw new InvalidTokenException("Token is expired");
+            throw new InvalidTokenException("Token not found. Probably it was already used");
         }
     }
 
@@ -80,7 +75,7 @@ class JWTServiceImpl implements JWTService
 
     private function isRefreshExpired(string $token): bool
     {
-        return $this->getTokenPayloadAsArray($token)['exp'] < now()->timestamp;
+        return $this->getTokenPayloadAsArray($token)['exp'] > now()->timestamp;
     }
 
     private function getTokenPayloadAsArray(string $token): array
