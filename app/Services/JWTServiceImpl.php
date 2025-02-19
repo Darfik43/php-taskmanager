@@ -13,7 +13,8 @@ class JWTServiceImpl implements JWTService
 {
 
     public function __construct(
-        private readonly RefreshTokenRepository $refreshTokenRepository
+        private readonly RefreshTokenRepository $refreshTokenRepository,
+        private readonly UserService $userService
     )
     {
     }
@@ -34,9 +35,11 @@ class JWTServiceImpl implements JWTService
     /**
      * @throws InvalidTokenException
      */
-    public function refreshTokens(string $token, JWTSubject $user): array //TODO $user may be deleted I think6 we can get it simply from token
+    public function refreshTokens(string $token): array
     {
-        if ($this->getRefreshTokenByToken($token) && $this->isRefreshExpired($token)) {
+        $user = $this->userService->getUserById($this->getRefreshTokenByToken($token)['user_id']);
+
+        if (!$this->isRefreshExpired($token)) {
             $this->refreshTokenRepository->delete($token);
             return $this->generateTokens($user);
         } else {
