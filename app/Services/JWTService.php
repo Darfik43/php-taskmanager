@@ -8,5 +8,5 @@ interface JWTService
 {
     public function generateTokens(JWTSubject $user): array;
 
-    public function refreshTokens(string $token, JWTSubject $user): array;
+    public function refreshTokens(string $token): array;
 }
