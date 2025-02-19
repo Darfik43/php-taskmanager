@@ -38,9 +38,10 @@ class JWTServiceImpl implements JWTService
     public function refreshTokens(string $token): array
     {
         if (!$this->isRefreshExpired($token)) {
+            $userId = $this->getRefreshTokenByToken($token)['user_id'];
             $this->refreshTokenRepository->delete($token);
             return $this->generateTokens(
-                $this->userService->getUserById($this->getRefreshTokenByToken($token)['user_id'])
+                $this->userService->getUserById($userId)
             );
         } else {
             throw new InvalidTokenException("Token is expired");
