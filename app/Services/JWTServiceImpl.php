@@ -43,7 +43,7 @@ class JWTServiceImpl implements JWTService
             $this->refreshTokenRepository->delete($token);
             return $this->generateTokens($user);
         } else {
-            throw new InvalidTokenException("Token not found. Probably it was already used");
+            throw new InvalidTokenException("Token is expired");
         }
     }
 
