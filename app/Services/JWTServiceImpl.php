@@ -44,22 +44,21 @@ class JWTServiceImpl implements JWTService
         }
     }
 
-    private function generateRefreshToken($user): string
+    private function generateRefreshToken(JWTSubject $user): string
     {
         return JWTAuth::customClaims([
             'exp' => now()->addMinutes(config('jwt.refresh_ttl'))
                 ->timestamp])->fromUser($user);
     }
 
-    private function generateAccessToken($user): string
+    private function generateAccessToken(JWTSubject $user): string
     {
         return JWTAuth::fromUser($user);
     }
 
-    private function storeRefreshToken($refreshToken): void
+    private function storeRefreshToken(string $refreshToken): void
     {
         $refreshArray = $this->getTokenPayloadAsArray($refreshToken);
-
         $this->refreshTokenRepository->create([
             'token' => $refreshToken,
             'created_at' => Carbon::createFromTimestamp($refreshArray['iat'])->toDateTimeString(),
