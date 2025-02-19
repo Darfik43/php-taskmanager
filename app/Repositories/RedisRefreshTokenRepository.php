@@ -28,7 +28,7 @@ class RedisRefreshTokenRepository implements RefreshTokenRepository
 
     public function findByToken(string $token): ?RefreshToken
     {
-        $tokenData = $this->redis->hgetall("refresh_token:{$token}");
+        $tokenData = $this->redis->hgetall("refresh_token:$token");
         if (empty($tokenData)) {
             return null;
         }
@@ -43,6 +43,6 @@ class RedisRefreshTokenRepository implements RefreshTokenRepository
 
     public function delete(string $token): void
     {
-        $this->redis->del("refresh_token:{$token}");
+        $this->redis->del("refresh_token:$token");
     }
 }

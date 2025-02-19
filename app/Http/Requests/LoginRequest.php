@@ -2,10 +2,12 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 
 class LoginRequest extends FormRequest
 {
@@ -20,7 +22,7 @@ class LoginRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array|string>
      */
     public function rules(): array
     {
@@ -35,7 +37,7 @@ class LoginRequest extends FormRequest
         throw (new ValidationException($validator))
             -> errorBag($this->errorBag)
             -> redirectTo($this->getRedirectUrl())
-            -> status(Response::HTTP_BAD_REQUEST);
+            -> status(ResponseAlias::HTTP_BAD_REQUEST);
     }
 
 

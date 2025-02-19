@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Eloquent;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,20 +15,19 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $created_at
  * @property string $expires_at
  * @property int $user_id
- * @property-read \App\Models\TFactory|null $use_factory
- * @method static \Illuminate\Database\Eloquent\Builder<static>|RefreshToken newModelQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|RefreshToken newQuery()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|RefreshToken query()
- * @method static \Illuminate\Database\Eloquent\Builder<static>|RefreshToken whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|RefreshToken whereExpiresAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|RefreshToken whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|RefreshToken whereToken($value)
- * @method static \Illuminate\Database\Eloquent\Builder<static>|RefreshToken whereUserId($value)
- * @mixin \Eloquent
+ * @property-read TFactory|null $use_factory
+ * @method static Builder<static>|RefreshToken newModelQuery()
+ * @method static Builder<static>|RefreshToken newQuery()
+ * @method static Builder<static>|RefreshToken query()
+ * @method static Builder<static>|RefreshToken whereCreatedAt($value)
+ * @method static Builder<static>|RefreshToken whereExpiresAt($value)
+ * @method static Builder<static>|RefreshToken whereId($value)
+ * @method static Builder<static>|RefreshToken whereToken($value)
+ * @method static Builder<static>|RefreshToken whereUserId($value)
+ * @mixin Eloquent
  */
 class RefreshToken extends Model
 {
-    use HasFactory;
 
     public $timestamps = false;
 

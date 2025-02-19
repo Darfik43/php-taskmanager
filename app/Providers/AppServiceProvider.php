@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Repositories\RedisRefreshTokenRepository;
 use App\Repositories\RefreshTokenRepository;
-use App\Repositories\SQLRefreshTokenRepository;
 use App\Repositories\UserRepository;
 use App\Repositories\UserRepositoryImpl;
 use App\Services\AuthService;

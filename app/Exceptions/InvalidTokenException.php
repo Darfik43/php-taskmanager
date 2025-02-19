@@ -2,9 +2,10 @@
 
 namespace App\Exceptions;
 
+use Exception;
 use Illuminate\Http\JsonResponse;
 
-class InvalidTokenException extends \Exception
+class InvalidTokenException extends Exception
 {
     public function __construct(string $message)
     {

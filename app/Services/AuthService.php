@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Exceptions\InvalidCredentialsException;
 use App\Exceptions\InvalidTokenException;
-use App\Models\User;
 
 interface AuthService
 {
