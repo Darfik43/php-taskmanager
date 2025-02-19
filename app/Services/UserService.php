@@ -7,4 +7,6 @@ use App\Models\User;
 interface UserService
 {
     public function createUser(array $data): User;
+
+    public function getUserById(int $id): User;
 }
