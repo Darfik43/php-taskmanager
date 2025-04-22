@@ -6,7 +6,7 @@
 /storage/*.key
 /storage/pail
 /vendor
-.env
+#.env env файл специально убран из гитигнора, чтобы тестовый сервер поднимался корректно без необходимости создавать энв
 .env.backup
 .env.production
 .phpactor.json
