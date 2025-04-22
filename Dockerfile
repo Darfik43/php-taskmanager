@@ -15,7 +15,9 @@ RUN a2enmod rewrite && \
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY . /var/www/html
-RUN chown -R www-data:www-data /var/www/html
 WORKDIR /var/www/html
 RUN composer install --no-dev --optimize-autoloader
+RUN chown -R www-data:www-data *
+USER www-data
+
 EXPOSE 80
