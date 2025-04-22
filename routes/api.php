@@ -12,8 +12,7 @@ Route::apiResource('tasks', TaskController::class);
 
 Route::prefix('auth')->group(function (){
     Route::post('login', [AuthController::class, 'login']);
-    Route::post('refresh', [AuthController::class, 'refresh'])
-    ->middleware(RefreshTokenMiddleware::class);
+    Route::post('refresh', [AuthController::class, 'refresh']);
 });
 
 Route::middleware([JwtMiddleware::class])->group(function () {

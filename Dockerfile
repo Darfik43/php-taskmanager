@@ -6,7 +6,9 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     netcat-openbsd \
-    && docker-php-ext-install pdo pdo_pgsql zip
+        && pecl install redis \
+        && docker-php-ext-enable redis \
+        && docker-php-ext-install pdo pdo_pgsql zip
 
 RUN a2enmod rewrite && \
     sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf && \
