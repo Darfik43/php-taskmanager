@@ -1,0 +1,312 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Documentation",
+        "version": "1.0.0",
+        "description": "API for user authentication and management"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api",
+            "description": "Local development server"
+        }
+    ],
+    "paths": {
+        "/login": {
+            "post": {
+                "tags": ["Authentication"],
+                "summary": "User login",
+                "description": "Authenticate user and return access/refresh tokens",
+                "operationId": "login",
+                "requestBody": {
+                    "description": "User credentials",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful authentication",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid credentials",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/refresh": {
+            "post": {
+                "tags": ["Authentication"],
+                "summary": "Refresh tokens",
+                "description": "Get new access token using refresh token",
+                "operationId": "refresh",
+                "requestBody": {
+                    "description": "Refresh token",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RefreshTokenRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Tokens refreshed successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AuthResource"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid refresh token",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users": {
+            "post": {
+                "tags": ["Users"],
+                "summary": "Register new user",
+                "description": "Creates a new user account with email and password",
+                "operationId": "createUser",
+                "requestBody": {
+                    "description": "User registration data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SignupRequest"
+                            },
+                            "example": {
+                                "email": "user@example.com",
+                                "password": "securePassword123",
+                                "passwordConfirmation": "securePassword123"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResource"
+                                },
+                                "example": {
+                                    "data": {
+                                        "id": 1,
+                                        "email": "user@example.com"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ValidationError"
+                                },
+                                "examples": {
+                                    "emailExists": {
+                                        "value": {
+                                            "message": "The email has already been taken.",
+                                            "errors": {
+                                                "email": ["The email has already been taken."]
+                                            }
+                                        }
+                                    },
+                                    "passwordMismatch": {
+                                        "value": {
+                                            "message": "The password confirmation does not match.",
+                                            "errors": {
+                                                "passwordConfirmation": ["The password confirmation does not match."]
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "LoginRequest": {
+                "type": "object",
+                "required": ["email", "password"],
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "example": "user@example.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "format": "password",
+                        "minLength": 6,
+                        "example": "password123"
+                    }
+                }
+            },
+            "RefreshTokenRequest": {
+                "type": "object",
+                "required": ["refreshToken"],
+                "properties": {
+                    "refreshToken": {
+                        "type": "string",
+                        "description": "Valid refresh token",
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                    }
+                }
+            },
+            "SignupRequest": {
+                "type": "object",
+                "required": ["email", "password", "passwordConfirmation"],
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "description": "User's email address",
+                        "example": "user@example.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "format": "password",
+                        "minLength": 8,
+                        "description": "User password (min 8 characters)",
+                        "example": "securePassword123"
+                    },
+                    "passwordConfirmation": {
+                        "type": "string",
+                        "format": "password",
+                        "description": "Password confirmation (must match password)",
+                        "example": "securePassword123"
+                    }
+                }
+            },
+            "AuthResource": {
+                "type": "object",
+                "properties": {
+                    "accessToken": {
+                        "type": "string",
+                        "description": "JWT access token",
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                    },
+                    "refreshToken": {
+                        "type": "string",
+                        "description": "JWT refresh token",
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+                    }
+                }
+            },
+            "UserResource": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "description": "User ID",
+                                "example": 1
+                            },
+                            "email": {
+                                "type": "string",
+                                "format": "email",
+                                "description": "User's email address",
+                                "example": "user@example.com"
+                            }
+                        }
+                    }
+                }
+            },
+            "ErrorResponse": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "description": "Error message",
+                        "example": "Invalid credentials"
+                    },
+                    "code": {
+                        "type": "integer",
+                        "description": "HTTP status code",
+                        "example": 401
+                    }
+                }
+            },
+            "ValidationError": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "description": "General error message",
+                        "example": "The given data was invalid."
+                    },
+                    "errors": {
+                        "type": "object",
+                        "description": "Detailed validation errors",
+                        "additionalProperties": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        },
+                        "example": {
+                            "email": ["The email has already been taken."],
+                            "passwordConfirmation": ["The password confirmation does not match."]
+                        }
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ]
+}
