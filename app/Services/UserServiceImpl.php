@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Exceptions\UserNotFoundException;
 use App\Models\User;
 use App\Repositories\UserRepository;
+use Illuminate\Auth\Events\Registered;
 
 class UserServiceImpl implements UserService
 {
@@ -18,7 +19,10 @@ class UserServiceImpl implements UserService
         if (isset($data['password'])) {
             $data['password'] = bcrypt($data['password']);
         }
-        return $this->userRepository->create($data);
+        $user = $this->userRepository->create($data);
+        event(new Registered($user));
+        return $user;
+
     }
 
     public function getUserById(int $id): User
