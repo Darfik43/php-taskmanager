@@ -18,6 +18,29 @@ return [
         'token' => env('POSTMARK_TOKEN'),
     ],
 
+    'mailjet' => [
+        'key' => env('MAILJET_APIKEY'),
+        'secret' => env('MAILJET_APISECRET'),
+        'transactional' => [
+            'call' => true,
+            'options' => [
+                'url' => 'api.mailjet.com',
+                'version' => 'v3.1',
+                'call' => true,
+                'secured' => true
+            ]
+        ],
+        'common' => [
+            'call' => true,
+            'options' => [
+                'url' => 'api.mailjet.com',
+                'version' => 'v3',
+                'call' => true,
+                'secured' => true
+            ]
+        ],
+    ],
+
     'ses' => [
         'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
