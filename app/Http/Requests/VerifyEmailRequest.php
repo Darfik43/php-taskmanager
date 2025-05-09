@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
 
 class VerifyEmailRequest extends FormRequest
@@ -11,7 +13,7 @@ class VerifyEmailRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,5 +26,23 @@ class VerifyEmailRequest extends FormRequest
         return [
             //
         ];
+    }
+
+    public function fulfill(): void
+    {
+        $user = User::find($this->route('id'));
+
+        if (!$user || !hash_equals(
+            sha1($user->getEmailForVerification()),
+            (string) $this->route('hash')
+            )) {
+            throw new AuthorizationException('Invalid verification link');
+        }
+
+        if ($user->hasVerifiedEmail()) {
+            throw new AuthorizationException('Email already verified');
+        }
+
+        $user->markEmailAsVerified();
     }
 }
