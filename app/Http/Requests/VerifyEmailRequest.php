@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Exceptions\EmailAlreadyVerifiedException;
+use App\Exceptions\VerificationInvalidLinkException;
 use App\Models\User;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Http\FormRequest;
@@ -36,11 +38,11 @@ class VerifyEmailRequest extends FormRequest
             sha1($user->getEmailForVerification()),
             (string) $this->route('hash')
             )) {
-            throw new AuthorizationException('Invalid verification link');
+            throw new VerificationInvalidLinkException('Invalid verification link');
         }
 
         if ($user->hasVerifiedEmail()) {
-            throw new AuthorizationException('Email already verified');
+            throw new EmailAlreadyVerifiedException('Email already verified');
         }
 
         $user->markEmailAsVerified();
