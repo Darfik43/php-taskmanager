@@ -17,6 +17,6 @@ class EmailAlreadyVerifiedException extends Exception
         return response()->json([
             'success' => false,
             'error' => $this->message
-        ], 403);
+        ], 409);
     }
 }
