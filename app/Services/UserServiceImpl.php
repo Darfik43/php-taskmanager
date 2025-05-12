@@ -30,4 +30,21 @@ class UserServiceImpl implements UserService
         return $this->userRepository->findById($id)
             ?? throw new UserNotFoundException('User not found');
     }
+
+    /**
+     * @throws UserNotFoundException
+     */
+    public function isEmailVerified(int $id): bool
+    {
+        return $this->getUserById($id)->hasVerifiedEmail();
+    }
+
+    /**
+     * @throws UserNotFoundException
+     */
+    public function getUserByEmail(string $email): User
+    {
+        return $this->userRepository->findByEmail($email)
+            ?? throw new UserNotFoundException('User not found');
+    }
 }

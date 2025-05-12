@@ -13,4 +13,6 @@ interface UserService
      * @throws UserNotFoundException
      */
     public function getUserById(int $id): User;
+    public function getUserByEmail(string $email): User;
+    public function isEmailVerified(int $id): bool;
 }
