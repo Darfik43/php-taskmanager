@@ -4,5 +4,5 @@ namespace App\Services;
 
 interface EmailVerificationService
 {
-    public function verifyEmail(array $emailVerificationData): bool;
+    public function verifyEmail(array $emailVerificationData);
 }
