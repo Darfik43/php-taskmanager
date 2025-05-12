@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\VerifyEmailRequest;
 use App\Http\Resources\EmailVerificationResource;
-use Illuminate\Http\JsonResponse;
+use App\Services\EmailVerificationService;
 
 class EmailController extends Controller
 {
@@ -14,6 +14,8 @@ class EmailController extends Controller
 
     public function verify(VerifyEmailRequest $request): EmailVerificationResource
     {
-        $this->emailVerificationService->verifyEmail($request);
+        return new EmailVerificationResource(
+            $this->emailVerificationService->verifyEmail($request->validated())
+        );
     }
 }
