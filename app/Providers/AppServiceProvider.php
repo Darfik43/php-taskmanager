@@ -8,6 +8,8 @@ use App\Repositories\UserRepository;
 use App\Repositories\UserRepositoryImpl;
 use App\Services\AuthService;
 use App\Services\AuthServiceImpl;
+use App\Services\EmailVerificationService;
+use App\Services\EmailVerificationServiceImpl;
 use App\Services\JWTService;
 use App\Services\JWTServiceImpl;
 use App\Services\UserService;
@@ -26,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(AuthService::class, AuthServiceImpl::class);
         $this->app->bind(JWTService::class, JWTServiceImpl::class);
         $this->app->bind(RefreshTokenRepository::class, RedisRefreshTokenRepository::class);
+        $this->app->bind(EmailVerificationService::class, EmailVerificationServiceImpl::class);
     }
 
     /**
