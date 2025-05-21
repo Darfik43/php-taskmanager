@@ -41,7 +41,13 @@ class Task extends Model
     protected $fillable = [
         'title',
         'details',
-        'isChecked'
+        'priority',
+        'is_completed',
+        'deadline',
+        'closed_at',
+        'created_at',
+        'updated_at',
+        'time_spent'
     ];
 
     /**
@@ -60,6 +66,11 @@ class Task extends Model
     protected function casts(): array
     {
         return [
+            'priority' => 'integer',
+            'is_completed' => 'boolean',
+            'deadline' => 'date',
+            'closed_at' => 'datetime',
+            'time_spent' => 'integer',
         ];
     }
 
