@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tasks', function (Blueprint $table) {
-            $table->id()->primary();
+            $table->id();
             $table->string('title', 50)->unique();
             $table->string('details', 100)->nullable();
             $table->tinyInteger('priority');
@@ -22,6 +22,13 @@ return new class extends Migration
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             $table->timestamp('closed_at')->nullable();
             $table->integer('time_spent')->nullable();
+
+            $table->integer('user_id');
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 
