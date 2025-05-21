@@ -12,12 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tasks', function (Blueprint $table) {
-            $table->id();
-            $table->string('title')->unique();
-            $table->string('details')->nullable();
-            $table->boolean('isChecked')->nullable();
-            $table->timestamp('created_at')->nullable();
-            $table->timestamp('updated_at')->nullable();
+            $table->id()->primary();
+            $table->string('title', 50)->unique();
+            $table->string('details', 100)->nullable();
+            $table->tinyInteger('priority');
+            $table->boolean('is_completed');
+            $table->date('deadline')->nullable();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
+            $table->timestamp('closed_at')->nullable();
+            $table->integer('time_spent')->nullable();
         });
     }
 
