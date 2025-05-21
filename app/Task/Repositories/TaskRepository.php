@@ -11,4 +11,5 @@ interface TaskRepository
     public function update(TaskDTO $taskDTO): Task;
     public function delete(TaskDTO $taskDTO): void;
     public function find(TaskDTO $taskDTO): Task;
+    public function findAll(TaskDTO $taskDTO): array;
 }
