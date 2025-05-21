@@ -48,7 +48,8 @@ class Task extends Model
         'closed_at',
         'created_at',
         'updated_at',
-        'time_spent'
+        'time_spent',
+        'user_id'
     ];
 
     /**
