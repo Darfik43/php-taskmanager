@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TaskRequest;
-use App\Models\Task;
 use App\Services\TaskService;
+use App\Task\Models\Task;
 
 class TaskController extends Controller
 {

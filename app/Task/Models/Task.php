@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Models;
+namespace App\Task\Models;
 
+use App\Models\TFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

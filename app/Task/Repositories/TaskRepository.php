@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Task\Repositories;
 
-use App\Models\Task;
+use App\Repositories\TaskDTO;
+use App\Task\Models\Task;
 
 interface TaskRepository
 {
