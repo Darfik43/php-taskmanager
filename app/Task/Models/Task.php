@@ -3,6 +3,7 @@
 namespace App\Task\Models;
 
 use App\Models\TFactory;
+use App\Task\Enums\Priority;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -74,7 +75,7 @@ class Task extends Model
     protected function casts(): array
     {
         return [
-            'priority' => 'integer',
+            'priority' => Priority::class,
             'is_completed' => 'boolean',
             'deadline' => 'date',
             'closed_at' => 'datetime',
