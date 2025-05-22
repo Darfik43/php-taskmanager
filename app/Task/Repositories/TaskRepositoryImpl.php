@@ -80,7 +80,18 @@ class TaskRepositoryImpl implements TaskRepository
 
     public function findAll(int $user_id): array
     {
-        return array(new Task());
+        $results = DB::select("
+            SELECT * FROM tasks
+            WHERE user_id = ?
+            ORDER BY created_at DESC
+        ", [$user_id]);
+
+        $tasks = [];
+        foreach($results as $result) {
+            $tasks[] = $this->hydrateTask((array) $result);
+        }
+
+        return $tasks;
     }
 
     private function hydrateTask(array $data): Task
