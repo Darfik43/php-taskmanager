@@ -3,32 +3,56 @@
 namespace App\Task\Repositories;
 
 use App\Task\Models\Task;
+use Illuminate\Support\Facades\DB;
 
 class TaskRepositoryImpl implements TaskRepository
 {
 
     public function create(Task $task): Task
     {
-        $sql = "INSERT INTO tasks ()"
+        return new Task();
     }
 
     public function update(Task $task): Task
     {
-        // TODO: Implement update() method.
+        return new Task();
     }
 
     public function delete(int $id): bool
     {
-        // TODO: Implement delete() method.
+        return true;
     }
 
     public function findById(int $id): ?Task
     {
-        // TODO: Implement find() method.
+        $data = DB::selectOne("
+        SELECT * FROM tasks
+        WHERE id = ?
+        LIMIT 1
+        ", [$id]);
+
+        return $data ? $this->hydrateTask((array) $data) : null;
     }
 
     public function findAll(int $user_id): array
     {
-        // TODO: Implement find() method.
+        return array(new Task());
+    }
+
+    private function hydrateTask(array $data): Task
+    {
+        $task = new Task;
+        $task->id = (int) $data['id'];
+        $task->title = (string) $data['title'];
+        $task->details = isset($data['details']) ? (string) $data['details'] : null;
+        $task->priority = (int) $data['priority'];
+        $task->is_completed = (bool) $data['is_completed'];
+        $task->deadline = $data['deadline'] ? new \DateTime($data['deadline']) : null;
+        $task->created_at = new \DateTime($data['created_at']);
+        $task->updated_at = new \DateTime($data['updated_at']);
+        $task->time_spent = isset($data['time_spent']) ?  (int) $data['time_spent']: null;
+
+
+        return new Task();
     }
 }
