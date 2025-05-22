@@ -14,6 +14,10 @@ use App\Services\JWTService;
 use App\Services\JWTServiceImpl;
 use App\Services\UserService;
 use App\Services\UserServiceImpl;
+use App\Task\Repositories\TaskRepository;
+use App\Task\Repositories\TaskRepositoryImpl;
+use App\Task\Services\TaskServiceImpl;
+use App\Task\TaskService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -29,6 +33,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(JWTService::class, JWTServiceImpl::class);
         $this->app->bind(RefreshTokenRepository::class, RedisRefreshTokenRepository::class);
         $this->app->bind(EmailVerificationService::class, EmailVerificationServiceImpl::class);
+        $this->app->bind(TaskRepository::class, TaskRepositoryImpl::class);
+        $this->app->bind(TaskService::class, TaskServiceImpl::class);
     }
 
     /**
