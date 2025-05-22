@@ -58,9 +58,13 @@ class TaskRepositoryImpl implements TaskRepository
         ]);
     }
 
-    public function delete(int $id): bool
+    public function delete(int $id): int
     {
-        return true;
+        return DB::delete(
+            "DELETE FROM tasks WHERE id = ?",
+                   [$id]
+        );
+
     }
 
     public function findById(int $id): ?Task
