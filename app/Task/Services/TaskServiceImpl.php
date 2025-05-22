@@ -3,10 +3,14 @@
 namespace App\Task\Services;
 
 use App\Task\DTOs\TaskDTO;
+use App\Task\Repositories\TaskRepository;
 use App\Task\TaskService;
 
 class TaskServiceImpl implements TaskService
 {
+    public function __construct(
+        private readonly TaskRepository $taskRepository
+    ) {}
     public function create(TaskDTO $taskDTO): void
     {
         // TODO: Implement create() method.
