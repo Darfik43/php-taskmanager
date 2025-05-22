@@ -2,22 +2,22 @@
 
 namespace App\Task\Services;
 
-use App\Task\TaskDTO;
+use App\Task\DTOs\TaskDTO;
 use App\Task\TaskService;
 
 class TaskServiceImpl implements TaskService
 {
-    public function create(TaskDTO $taskDTO): bool
+    public function create(TaskDTO $taskDTO): void
     {
         // TODO: Implement create() method.
     }
 
-    public function update(TaskDTO $taskDTO): bool
+    public function update(TaskDTO $taskDTO): void
     {
         // TODO: Implement update() method.
     }
 
-    public function delete(TaskDTO $taskDTO): bool
+    public function delete(TaskDTO $taskDTO): void
     {
         // TODO: Implement delete() method.
     }
