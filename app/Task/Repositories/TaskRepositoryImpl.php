@@ -22,7 +22,7 @@ class TaskRepositoryImpl implements TaskRepository
         // TODO: Implement delete() method.
     }
 
-    public function find(int $id): Task
+    public function findById(int $id): Task
     {
         // TODO: Implement find() method.
     }
