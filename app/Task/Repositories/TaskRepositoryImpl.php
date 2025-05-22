@@ -62,7 +62,7 @@ class TaskRepositoryImpl implements TaskRepository
     {
         return DB::delete(
             "DELETE FROM tasks WHERE id = ?",
-                   [$id]
+            [$id]
         );
 
     }
@@ -75,7 +75,7 @@ class TaskRepositoryImpl implements TaskRepository
         LIMIT 1
         ", [$id]);
 
-        return $data ? $this->hydrateTask((array) $data) : null;
+        return $data ? $this->hydrateTask((array)$data) : null;
     }
 
     public function findAll(int $user_id): array
@@ -86,15 +86,15 @@ class TaskRepositoryImpl implements TaskRepository
     private function hydrateTask(array $data): Task
     {
         $task = new Task;
-        $task->id = (int) $data['id'];
-        $task->title = (string) $data['title'];
-        $task->details = isset($data['details']) ? (string) $data['details'] : null;
-        $task->priority = (int) $data['priority'];
-        $task->is_completed = (bool) $data['is_completed'];
+        $task->id = (int)$data['id'];
+        $task->title = (string)$data['title'];
+        $task->details = isset($data['details']) ? (string)$data['details'] : null;
+        $task->priority = (int)$data['priority'];
+        $task->is_completed = (bool)$data['is_completed'];
         $task->deadline = $data['deadline'] ? new \DateTime($data['deadline']) : null;
         $task->created_at = new \DateTime($data['created_at']);
         $task->updated_at = new \DateTime($data['updated_at']);
-        $task->time_spent = isset($data['time_spent']) ?  (int) $data['time_spent']: null;
+        $task->time_spent = isset($data['time_spent']) ? (int)$data['time_spent'] : null;
 
 
         return new Task();
