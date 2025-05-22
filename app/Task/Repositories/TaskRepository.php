@@ -2,14 +2,13 @@
 
 namespace App\Task\Repositories;
 
-use App\Repositories\TaskDTO;
 use App\Task\Models\Task;
 
 interface TaskRepository
 {
-    public function create(TaskDTO $taskDTO): Task;
-    public function update(TaskDTO $taskDTO): Task;
-    public function delete(TaskDTO $taskDTO): void;
-    public function find(TaskDTO $taskDTO): Task;
-    public function findAll(TaskDTO $taskDTO): array;
+    public function create(Task $task): Task;
+    public function update(Task $task): Task;
+    public function delete(int $id): void;
+    public function find(int $id): Task;
+    public function findAll(int $user_id): array;
 }

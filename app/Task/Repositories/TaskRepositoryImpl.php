@@ -2,33 +2,32 @@
 
 namespace App\Task\Repositories;
 
-use App\Repositories\TaskDTO;
 use App\Task\Models\Task;
 
 class TaskRepositoryImpl implements TaskRepository
 {
 
-    public function create(TaskDTO $taskDTO): Task
+    public function create(Task $task): Task
     {
         $sql = "INSERT INTO tasks ()"
     }
 
-    public function update(TaskDTO $taskDTO): Task
+    public function update(Task $task): Task
     {
         // TODO: Implement update() method.
     }
 
-    public function delete(TaskDTO $taskDTO): void
+    public function delete(int $id): void
     {
         // TODO: Implement delete() method.
     }
 
-    public function find(TaskDTO $taskDTO): Task
+    public function find(int $id): Task
     {
         // TODO: Implement find() method.
     }
 
-    public function findAll(TaskDTO $taskDTO): array
+    public function findAll(int $user_id): array
     {
         // TODO: Implement find() method.
     }
