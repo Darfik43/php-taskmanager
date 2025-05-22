@@ -8,9 +8,30 @@ use Illuminate\Support\Facades\DB;
 class TaskRepositoryImpl implements TaskRepository
 {
 
-    public function create(Task $task): Task
+    public function create(Task $task): bool
     {
-        return new Task();
+        return DB::insert("
+            INSERT INTO tasks (user_id,
+                               title,
+                               details,
+                               priority,
+                               is_completed,
+                               deadline,
+                               time_spent,
+                               created_at,
+                               updated_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?,?, NOW(), NOW())
+        ", [
+            $task->user_id,
+            $task->title,
+            $task->details,
+            $task->priority,
+            $task->is_completed,
+            $task->deadline,
+            $task->time_spent,
+        ]);
+
+
     }
 
     public function update(Task $task): Task
