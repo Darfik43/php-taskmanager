@@ -34,9 +34,28 @@ class TaskRepositoryImpl implements TaskRepository
 
     }
 
-    public function update(Task $task): Task
+    public function update(Task $task): int
     {
-        return new Task();
+        return DB::update("
+            UPDATE tasks
+            SET
+                title = ?,
+                details = ?,
+                priority = ?,
+                is_completed = ?,
+                deadline = ?,
+                time_spent = ?,
+                updated_at = NOW()
+            WHERE id = ?
+        ", [
+            $task->title,
+            $task->details,
+            $task->priority,
+            $task->is_completed,
+            $task->deadline,
+            $task->time_spent,
+            $task->id
+        ]);
     }
 
     public function delete(int $id): bool
