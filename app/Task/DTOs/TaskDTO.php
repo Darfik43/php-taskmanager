@@ -2,13 +2,15 @@
 
 namespace App\Task\DTOs;
 
+use App\Task\Enums\Priority;
+
 readonly class TaskDTO
 {
     public function __construct(
         public int $id,
         public string $title,
         public string $details,
-        public int $priority,
+        public Priority $priority,
         public \DateTime $deadline,
         public \DateTime $closedAt,
         public \DateTime $createdAt,
