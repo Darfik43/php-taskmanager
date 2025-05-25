@@ -94,7 +94,7 @@ class TaskRepositoryImpl implements TaskRepository
 
         $tasks = [];
         foreach($results as $result) {
-            $tasks[] = $this->hydrateShortTask((array) $result);
+            $tasks[] = $this->hydrateTask((array) $result);
         }
 
         return $tasks;
@@ -109,22 +109,11 @@ class TaskRepositoryImpl implements TaskRepository
         $task->priority = (int)$data['priority'];
         $task->is_completed = (bool)$data['is_completed'];
         $task->deadline = $data['deadline'] ? new \DateTime($data['deadline']) : null;
-        $task->created_at = new \DateTime($data['created_at']);
-        $task->updated_at = new \DateTime($data['updated_at']);
+        $task->created_at = isset($data['created_at']) ? new \DateTime($data['created_at']) : null;
+        $task->updated_at = isset($data['updated_at']) ? new \DateTime($data['updated_at']) : null;
         $task->time_spent = isset($data['time_spent']) ? (int)$data['time_spent'] : null;
-        $task->user_id = (int)$data['user_id'];
+        $task->user_id = isset($data['user_id']) ? (int)$data['user_id'] : null;
 
-
-        return $task;
-    }
-
-    private function hydrateShortTask(array $data): Task
-    {
-        $task = new Task();
-        $task->id = (int)$data['id'];
-        $task->title = (string)$data['title'];
-        $task->priority = (int)$data['priority'];
-        $task->is_completed = (bool)$data['is_completed'];
 
         return $task;
     }
