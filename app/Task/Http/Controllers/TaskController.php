@@ -5,6 +5,8 @@ namespace App\Task\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Task\Http\Requests\CreateTaskRequest;
 use App\Task\Http\Requests\UpdateTaskRequest;
+use App\Task\Http\Resources\TaskCollection;
+use App\Task\Http\Resources\TaskResource;
 use App\Task\TaskService;
 
 class TaskController extends Controller
@@ -13,12 +15,12 @@ class TaskController extends Controller
         private readonly TaskService $taskService
     ) {}
 
-    public function index()
+    public function index(): TaskCollection
     {
 
     }
 
-    public function show(int $id)
+    public function show(int $id): TaskResource
     {
 
     }
