@@ -21,4 +21,10 @@ class ShortTaskCollection extends ResourceCollection
             'data' => $this->collection,
         ];
     }
+
+    public function toResponse($request)
+    {
+        return parent::toResponse($request)
+            ->setStatusCode(200);
+    }
 }
