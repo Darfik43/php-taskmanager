@@ -3,6 +3,7 @@
 namespace App\Task\Services;
 
 use App\Task\DTOs\TaskDTO;
+use App\Task\Exceptions\TaskNotFoundException;
 use App\Task\Models\Task;
 use App\Task\Repositories\TaskRepository;
 use App\Task\TaskService;
@@ -11,7 +12,10 @@ class TaskServiceImpl implements TaskService
 {
     public function __construct(
         private readonly TaskRepository $taskRepository
-    ) {}
+    )
+    {
+    }
+
     public function create(TaskDTO $taskDTO): void
     {
         $this->taskRepository->create(new Task((array)$taskDTO));
@@ -19,22 +23,26 @@ class TaskServiceImpl implements TaskService
 
     public function update(TaskDTO $taskDTO): void
     {
-        $this->taskRepository->update(new Task((array)$taskDTO));
+        $this->taskRepository->update(TaskDTO::toModel($taskDTO));
     }
 
-    public function delete(TaskDTO $taskDTO): void
+    public function delete(int $id, int $userId): void
     {
         if ()
-        $this->taskRepository->delete()
+            $this->taskRepository->delete()
     }
 
-    public function get(int $id): TaskDTO
+    /**
+     * @throws TaskNotFoundException
+     */
+    public function get(int $id, int $userId): TaskDTO
     {
         $task = $this->taskRepository->findById($id);
 
-        if ($task) {
-            return new TaskDTO();
-        }
+
+        return $task ?
+            TaskDTO::toDTO($task)
+            : throw new TaskNotFoundException("Task not found");
     }
 
     public function getAll(int $user_id): array
@@ -42,9 +50,12 @@ class TaskServiceImpl implements TaskService
         // TODO: Implement getAll() method.
     }
 
+    /**
+     * @throws TaskNotFoundException
+     */
     private function isUserOwner(TaskDTO $taskDTO): bool
     {
-        $task = $this->get($taskDTO->userId);
+        $task = $this->get($taskDTO->id);
         return $taskDTO->userId === $task->userId;
     }
 }
