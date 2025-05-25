@@ -61,9 +61,9 @@ class TaskServiceImpl implements TaskService
             throw new TaskNotFoundException("Task not found");
     }
 
-    public function getAllByUser(int $user_id): array
+    public function getShortAllByUser(int $user_id): array
     {
-        $taskList = $this->taskRepository->findAllByUser($user_id);
+        $taskList = $this->taskRepository->findShortAllByUser($user_id);
 
         $result = [];
         foreach ($taskList as $task) {
