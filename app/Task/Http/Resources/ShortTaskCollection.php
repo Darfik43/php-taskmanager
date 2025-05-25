@@ -8,7 +8,7 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 /**
  * @mixin ShortTaskDTO
  */
-class TaskCollection extends ResourceCollection
+class ShortTaskCollection extends ResourceCollection
 {
     /**
      * Transform the resource into an array.
