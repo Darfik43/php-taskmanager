@@ -6,6 +6,7 @@ use App\Models\TFactory;
 use App\Task\Enums\Priority;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Validation\Rules\Enum;
 
 /**
  *
@@ -13,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $id
  * @property string $title
  * @property string|null $details
- * @property int $priority
+ * @property Enum $priority
  * @property bool $is_completed
  * @property \Illuminate\Support\Carbon|null $deadline
  * @property \Illuminate\Support\Carbon $created_at
