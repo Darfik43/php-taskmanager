@@ -5,7 +5,7 @@ namespace App\Task\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Task\Http\Requests\CreateTaskRequest;
 use App\Task\Http\Requests\UpdateTaskRequest;
-use App\Task\Http\Resources\TaskCollection;
+use App\Task\Http\Resources\ShortTaskCollection;
 use App\Task\Http\Resources\TaskResource;
 use App\Task\Services\TaskService;
 
@@ -15,14 +15,15 @@ class TaskController extends Controller
         private readonly TaskService $taskService
     ) {}
 
-    public function index(): TaskCollection
+    public function index(): ShortTaskCollection
     {
-        $this->taskService->getShortAllByUser(1);
+        $result = $this->taskService->getShortAllByUser(auth()->id());
+        return new ShortTaskCollection($result);
     }
 
     public function show(int $id): TaskResource
     {
-
+        return new TaskResource($this->taskService->get($id, auth()->id()));
     }
 
     public function store(CreateTaskRequest $createTaskRequest)
