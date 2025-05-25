@@ -14,10 +14,10 @@ readonly class TaskDTO
         public bool $isCompleted,
         public Priority $priority,
         public \DateTime $deadline,
-        public \DateTime $closedAt,
+        public ?\DateTime $closedAt,
         public \DateTime $createdAt,
         public \DateTime $updatedAt,
-        public int $timeSpent,
+        public ?int $timeSpent,
         public int $userId,
     ) {}
 
