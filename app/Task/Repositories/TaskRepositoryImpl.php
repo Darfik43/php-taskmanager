@@ -78,10 +78,16 @@ class TaskRepositoryImpl implements TaskRepository
         return $data ? $this->hydrateTask((array)$data) : null;
     }
 
-    public function findAllByUser(int $user_id): array
+    public function findShortAllByUser(int $user_id): array
     {
         $results = DB::select("
-            SELECT * FROM tasks
+            SELECT
+                id,
+                title,
+                priority,
+                is_completed,
+                deadline
+            FROM tasks
             WHERE user_id = ?
             ORDER BY created_at DESC
         ", [$user_id]);
