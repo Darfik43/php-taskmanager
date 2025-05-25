@@ -53,9 +53,6 @@ class Task extends Model
         'priority',
         'is_completed',
         'deadline',
-        'closed_at',
-        'created_at',
-        'updated_at',
         'time_spent',
         'user_id'
     ];
