@@ -3,6 +3,7 @@
 namespace App\Task\DTOs;
 
 use App\Task\Enums\Priority;
+use App\Task\Models\Task;
 
 readonly class TaskDTO
 {
@@ -18,4 +19,20 @@ readonly class TaskDTO
         public int $timeSpent,
         public int $userId,
     ) {}
+
+    public function toDTO(Task $task): TaskDTO
+    {
+        return new TaskDTO(
+            id: $task->id,
+            title: $task->title,
+            details: $task->details,
+            priority: $task->priority,
+            deadline: $task->deadline,
+            closedAt: $task->closed_at,
+            createdAt: $task->created_at,
+            updatedAt: $task->updated_at,
+            timeSpent: $task->time_spent,
+            userId: $task->user_id
+        );
+    }
 }
