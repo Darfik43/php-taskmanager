@@ -6,7 +6,7 @@ use App\Task\DTOs\TaskDTO;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @mixin TaskDTO  // Это подскажет IDE, что $this - это Task
+ * @mixin TaskDTO
  */
 class TaskResource extends JsonResource
 {
