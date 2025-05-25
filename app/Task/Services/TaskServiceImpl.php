@@ -16,9 +16,7 @@ class TaskServiceImpl implements TaskService
     {
     }
 
-    /**
-     * @throws TaskNotFoundException
-     */
+
     public function create(TaskDTO $taskDTO): void
     {
             $this->taskRepository->create(TaskDTO::toModel($taskDTO));
@@ -64,7 +62,6 @@ class TaskServiceImpl implements TaskService
 
     public function getAll(int $user_id): array
     {
-        // TODO: Implement getAll() method.
     }
 
     private function isUserOwner(int $userId, Task $task): bool
