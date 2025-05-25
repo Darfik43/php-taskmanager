@@ -21,7 +21,7 @@ readonly class TaskDTO
     ) {}
 
     // prob both those methods should be moved to another class in future
-    public function toDTO(Task $task): TaskDTO
+    public static function toDTO(Task $task): TaskDTO
     {
         return new TaskDTO(
             id: $task->id,
@@ -37,7 +37,7 @@ readonly class TaskDTO
         );
     }
 
-    public function toModel(TaskDTO $taskDTO): Task
+    public static function toModel(TaskDTO $taskDTO): Task
     {
         return new Task([
             'id' => $taskDTO->id,
