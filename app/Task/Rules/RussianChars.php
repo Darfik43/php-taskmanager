@@ -5,7 +5,7 @@ namespace App\Task\Rules;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 
-class RussianAlphabet implements ValidationRule
+class RussianChars implements ValidationRule
 {
     /**
      * Run the validation rule.
