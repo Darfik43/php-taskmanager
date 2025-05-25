@@ -39,10 +39,10 @@ class TaskServiceImpl implements TaskService
     {
         $task = $this->taskRepository->findById($id);
 
-
-        return $task ?
-            TaskDTO::toDTO($task)
-            : throw new TaskNotFoundException("Task not found");
+        if ($task && $this->isUserOwner($userId, $task)) {
+            return TaskDTO::toDTO($task);
+        } else
+            throw new TaskNotFoundException("Task not found");
     }
 
     public function getAll(int $user_id): array
@@ -50,12 +50,8 @@ class TaskServiceImpl implements TaskService
         // TODO: Implement getAll() method.
     }
 
-    /**
-     * @throws TaskNotFoundException
-     */
-    private function isUserOwner(TaskDTO $taskDTO): bool
+    private function isUserOwner(int $userId, Task $task): bool
     {
-        $task = $this->get($taskDTO->id);
-        return $taskDTO->userId === $task->userId;
+        return $userId === $task->user_id;
     }
 }
