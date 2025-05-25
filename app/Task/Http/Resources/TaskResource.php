@@ -30,4 +30,10 @@ class TaskResource extends JsonResource
             'time_spent' => $this->timeSpent,
         ];
     }
+
+    public function toResponse($request)
+    {
+        return parent::toResponse($request)
+            ->setStatusCode(200);
+    }
 }
