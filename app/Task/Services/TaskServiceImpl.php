@@ -26,10 +26,17 @@ class TaskServiceImpl implements TaskService
         $this->taskRepository->update(TaskDTO::toModel($taskDTO));
     }
 
+
+    /**
+     * @throws TaskNotFoundException
+     */
     public function delete(int $id, int $userId): void
     {
-        if ()
-            $this->taskRepository->delete()
+        $task = $this->taskRepository->findById($id);
+
+        $this->isUserOwner($id, $task)
+            ? $this->taskRepository->delete($id)
+            : throw new TaskNotFoundException("Task not found");
     }
 
     /**
