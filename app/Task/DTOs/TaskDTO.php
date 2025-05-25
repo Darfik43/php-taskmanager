@@ -45,13 +45,14 @@ readonly class TaskDTO
             'id' => $taskDTO->id,
             'title' => $taskDTO->title,
             'details' => $taskDTO->details,
+            'is_completed' => $taskDTO->isCompleted,
             'priority' => $taskDTO->priority,
             'deadline' => $taskDTO->deadline,
-            'closed_at' => $taskDTO->closed_at,
-            'created_at' => $taskDTO->created_at,
-            'updated_at' => $taskDTO->updated_at,
-            'time_spent' => $taskDTO->time_spent,
-            'user_id' => $taskDTO->user_id
+            'closed_at' => $taskDTO->closedAt,
+            'created_at' => $taskDTO->createdAt,
+            'updated_at' => $taskDTO->updatedAt,
+            'time_spent' => $taskDTO->timeSpent,
+            'user_id' => $taskDTO->userId
             ]);
     }
 }
