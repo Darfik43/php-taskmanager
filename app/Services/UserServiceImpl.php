@@ -20,7 +20,7 @@ class UserServiceImpl implements UserService
             $data['password'] = bcrypt($data['password']);
         }
         $user = $this->userRepository->create($data);
-//        event(new Registered($user));
+        event(new Registered($user));
         return $user;
 
     }
