@@ -21,7 +21,7 @@ readonly class TaskDTO
         public int $userId,
     ) {}
 
-    // prob both those methods should be moved to another class in future
+    // prob methods below should be moved to another class in future to fabric class
     public static function toDTO(Task $task): TaskDTO
     {
         return new TaskDTO(
@@ -54,5 +54,22 @@ readonly class TaskDTO
             'time_spent' => $taskDTO->timeSpent,
             'user_id' => $taskDTO->userId
             ]);
+    }
+
+    public static function make(array $data): TaskDTO
+    {
+        return new TaskDTO(
+            id: $data['id'],
+            title: $data['title'],
+            details: $data['details'],
+            isCompleted: $data['is_completed'],
+            priority: $data['priority'],
+            deadline: $data['deadline'],
+            closedAt: $data['closed_at'],
+            createdAt: $data['created"at'],
+            updatedAt: $data['updated_at'],
+            timeSpent: $data['time_spent'],
+            userId: $data['user_id'],
+        );
     }
 }
