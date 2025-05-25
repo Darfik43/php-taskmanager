@@ -3,6 +3,7 @@
 namespace App\Task\Services;
 
 use App\Task\DTOs\TaskDTO;
+use App\Task\Models\Task;
 use App\Task\Repositories\TaskRepository;
 use App\Task\TaskService;
 
@@ -13,22 +14,27 @@ class TaskServiceImpl implements TaskService
     ) {}
     public function create(TaskDTO $taskDTO): void
     {
-        // TODO: Implement create() method.
+        $this->taskRepository->create(new Task((array)$taskDTO));
     }
 
     public function update(TaskDTO $taskDTO): void
     {
-        // TODO: Implement update() method.
+        $this->taskRepository->update(new Task((array)$taskDTO));
     }
 
     public function delete(TaskDTO $taskDTO): void
     {
-        // TODO: Implement delete() method.
+        if ()
+        $this->taskRepository->delete()
     }
 
     public function get(int $id): TaskDTO
     {
-        // TODO: Implement get() method.
+        $task = $this->taskRepository->findById($id);
+
+        if ($task) {
+            return new TaskDTO();
+        }
     }
 
     public function getAll(int $user_id): array
@@ -36,4 +42,9 @@ class TaskServiceImpl implements TaskService
         // TODO: Implement getAll() method.
     }
 
+    private function isUserOwner(TaskDTO $taskDTO): bool
+    {
+        $task = $this->get($taskDTO->userId);
+        return $taskDTO->userId === $task->userId;
+    }
 }
