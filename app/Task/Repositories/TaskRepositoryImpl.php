@@ -85,8 +85,7 @@ class TaskRepositoryImpl implements TaskRepository
                 id,
                 title,
                 priority,
-                is_completed,
-                deadline
+                is_completed
             FROM tasks
             WHERE user_id = ?
             ORDER BY created_at DESC
@@ -108,7 +107,7 @@ class TaskRepositoryImpl implements TaskRepository
         $task->details = isset($data['details']) ? (string)$data['details'] : null;
         $task->priority = (int)$data['priority'];
         $task->is_completed = (bool)$data['is_completed'];
-        $task->deadline = $data['deadline'] ? new \DateTime($data['deadline']) : null;
+        $task->deadline = isset($data['deadline']) ? new \DateTime($data['deadline']) : null;
         $task->created_at = isset($data['created_at']) ? new \DateTime($data['created_at']) : null;
         $task->updated_at = isset($data['updated_at']) ? new \DateTime($data['updated_at']) : null;
         $task->time_spent = isset($data['time_spent']) ? (int)$data['time_spent'] : null;
