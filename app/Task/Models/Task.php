@@ -14,7 +14,7 @@ use Illuminate\Validation\Rules\Enum;
  * @property int $id
  * @property string $title
  * @property string|null $details
- * @property Enum $priority
+ * @property Priority $priority
  * @property bool $is_completed
  * @property \Illuminate\Support\Carbon|null $deadline
  * @property \Illuminate\Support\Carbon $created_at
