@@ -2,6 +2,7 @@
 
 namespace App\Task\Services;
 
+use App\Task\DTOs\ShortTaskDTO;
 use App\Task\DTOs\TaskDTO;
 use App\Task\Exceptions\TaskNotFoundException;
 use App\Task\Models\Task;
@@ -66,7 +67,7 @@ class TaskServiceImpl implements TaskService
 
         $result = [];
         foreach ($taskList as $task) {
-            $result[] = TaskDTO::toDTO($task);
+            $result[] = ShortTaskDTO::toDTO($task);
         }
 
         return $result;
