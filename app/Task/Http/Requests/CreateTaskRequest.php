@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Task\Http\Requests;
 
+use App\Task\Rules\RussianChars;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class TaskRequest extends FormRequest
+class CreateTaskRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +24,12 @@ class TaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|min:3',
-            'details' => 'required|min:3',
-            'isChecked' => 'required',
+            'title' => ['required', 'min:1', 'max:50', RussianChars::class],
+            'details' => ['max:100', RussianChars::class],
+            'is_completed' => 'required|boolean',
+            'priority' => 'required|integer|between:1,4',
+            'deadline' => 'date',
+            'time_spent' => 'numeric',
         ];
     }
 }
