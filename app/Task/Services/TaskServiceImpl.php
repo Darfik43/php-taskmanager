@@ -4,6 +4,7 @@ namespace App\Task\Services;
 
 use App\Task\DTOs\ShortTaskDTO;
 use App\Task\DTOs\TaskDTO;
+use App\Task\Enums\Priority;
 use App\Task\Exceptions\TaskNotFoundException;
 use App\Task\Models\Task;
 use App\Task\Repositories\TaskRepository;
@@ -19,7 +20,7 @@ class TaskServiceImpl implements TaskService
 
     public function create(TaskDTO $taskDTO): void
     {
-            $this->taskRepository->create(TaskDTO::toModel($taskDTO));
+        $this->taskRepository->create(TaskDTO::toModel($taskDTO));
     }
 
     /**
@@ -53,7 +54,7 @@ class TaskServiceImpl implements TaskService
     public function get(int $id, int $userId): TaskDTO
     {
         $task = $this->taskRepository->findById($id);
-
+        $test = $task->priority;
         if ($task && $this->isUserOwner($userId, $task)) {
             return TaskDTO::toDTO($task);
         } else
