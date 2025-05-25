@@ -94,7 +94,7 @@ class TaskRepositoryImpl implements TaskRepository
 
         $tasks = [];
         foreach($results as $result) {
-            $tasks[] = $this->hydrateTask((array) $result);
+            $tasks[] = $this->hydrateShortTask((array) $result);
         }
 
         return $tasks;
@@ -112,7 +112,19 @@ class TaskRepositoryImpl implements TaskRepository
         $task->created_at = new \DateTime($data['created_at']);
         $task->updated_at = new \DateTime($data['updated_at']);
         $task->time_spent = isset($data['time_spent']) ? (int)$data['time_spent'] : null;
+        $task->user_id = (int)$data['user_id'];
 
+
+        return $task;
+    }
+
+    private function hydrateShortTask(array $data): Task
+    {
+        $task = new Task();
+        $task->id = (int)$data['id'];
+        $task->title = (string)$data['title'];
+        $task->priority = (int)$data['priority'];
+        $task->is_completed = (bool)$data['is_completed'];
 
         return $task;
     }
