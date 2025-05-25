@@ -10,5 +10,5 @@ interface TaskService
     public function update(TaskDTO $taskDTO): void;
     public function delete(int $id, int $userId): void;
     public function get(int $id, int $userId): TaskDTO;
-    public function getAllByUser(int $user_id): array;
+    public function getShortAllByUser(int $user_id): array;
 }
