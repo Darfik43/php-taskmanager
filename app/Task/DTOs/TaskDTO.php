@@ -7,7 +7,7 @@ use App\Task\Models\Task;
 
 readonly class TaskDTO
 {
-    public function __construct(
+    private function __construct(
         public int $id,
         public string $title,
         public string $details,
@@ -34,5 +34,21 @@ readonly class TaskDTO
             timeSpent: $task->time_spent,
             userId: $task->user_id
         );
+    }
+
+    public function toModel(TaskDTO $taskDTO): Task
+    {
+        return new Task([
+            'id' => $taskDTO->id,
+            'title' => $taskDTO->title,
+            'details' => $taskDTO->details,
+            'priority' => $taskDTO->priority,
+            'deadline' => $taskDTO->deadline,
+            'closed_at' => $taskDTO->closed_at,
+            'created_at' => $taskDTO->created_at,
+            'updated_at' => $taskDTO->updated_at,
+            'time_spent' => $taskDTO->time_spent,
+            'user_id' => $taskDTO->user_id
+            ]);
     }
 }
