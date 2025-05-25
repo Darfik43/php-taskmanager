@@ -20,6 +20,7 @@ readonly class TaskDTO
         public int $userId,
     ) {}
 
+    // prob both those methods should be moved to another class in future
     public function toDTO(Task $task): TaskDTO
     {
         return new TaskDTO(
