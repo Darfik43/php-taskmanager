@@ -17,7 +17,7 @@ class TaskController extends Controller
 
     }
 
-    public function show()
+    public function show(int $id)
     {
 
     }
@@ -27,12 +27,12 @@ class TaskController extends Controller
 
     }
 
-    public function update()
+    public function update(UpdateTaskRequest $updateTaskRequest)
     {
 
     }
 
-    public function destroy()
+    public function destroy($id)
     {
 
     }
