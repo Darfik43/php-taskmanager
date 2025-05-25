@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Task;
+namespace App\Task\Services;
 
 use App\Task\DTOs\TaskDTO;
 

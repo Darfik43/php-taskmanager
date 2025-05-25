@@ -17,7 +17,7 @@ use App\Services\UserServiceImpl;
 use App\Task\Repositories\TaskRepository;
 use App\Task\Repositories\TaskRepositoryImpl;
 use App\Task\Services\TaskServiceImpl;
-use App\Task\TaskService;
+use App\Task\Services\TaskService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

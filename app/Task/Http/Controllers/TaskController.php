@@ -7,7 +7,7 @@ use App\Task\Http\Requests\CreateTaskRequest;
 use App\Task\Http\Requests\UpdateTaskRequest;
 use App\Task\Http\Resources\TaskCollection;
 use App\Task\Http\Resources\TaskResource;
-use App\Task\TaskService;
+use App\Task\Services\TaskService;
 
 class TaskController extends Controller
 {
@@ -17,7 +17,7 @@ class TaskController extends Controller
 
     public function index(): TaskCollection
     {
-
+        $this->taskService->getShortAllByUser(1);
     }
 
     public function show(int $id): TaskResource
