@@ -44,7 +44,6 @@ class TaskServiceImpl implements TaskService
     {
         $task = $this->taskRepository->findById($id);
 
-        $taskDTO = $this->get()
         $this->isUserOwner($userId, $task)
             ? $this->taskRepository->delete($id)
             : throw new TaskNotFoundException("Task not found");
@@ -71,12 +70,5 @@ class TaskServiceImpl implements TaskService
     private function isUserOwner(int $userId, Task $task): bool
     {
         return $userId === $task->user_id;
-    }
-
-    private function isTaskAvailable(int $id, int $userId): bool
-    {
-        $task = $this->taskRepository->findById($id);
-
-        return $task && $userId === $task->user_id;
     }
 }
