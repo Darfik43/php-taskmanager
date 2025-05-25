@@ -96,7 +96,7 @@ class TaskRepositoryImpl implements TaskRepository
 
     private function hydrateTask(array $data): Task
     {
-        $task = new Task;
+        $task = new Task();
         $task->id = (int)$data['id'];
         $task->title = (string)$data['title'];
         $task->details = isset($data['details']) ? (string)$data['details'] : null;
@@ -108,6 +108,6 @@ class TaskRepositoryImpl implements TaskRepository
         $task->time_spent = isset($data['time_spent']) ? (int)$data['time_spent'] : null;
 
 
-        return new Task();
+        return $task;
     }
 }
