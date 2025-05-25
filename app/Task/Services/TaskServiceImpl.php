@@ -24,7 +24,7 @@ class TaskServiceImpl implements TaskService
         $task = $this->taskRepository->findById($taskDTO->id);
 
         $this->isUserOwner($taskDTO->userId, $task)
-            ? $this->taskRepository->update(TaskDTO::toModel($taskDTO))
+            ? $this->taskRepository->create(TaskDTO::toModel($taskDTO))
             : throw new TaskNotFoundException("Task not found");
     }
 
