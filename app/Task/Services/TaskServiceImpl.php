@@ -60,8 +60,16 @@ class TaskServiceImpl implements TaskService
             throw new TaskNotFoundException("Task not found");
     }
 
-    public function getAll(int $user_id): array
+    public function getAllByUser(int $user_id): array
     {
+        $taskList = $this->taskRepository->findAllByUser($user_id);
+
+        $result = [];
+        foreach ($taskList as $task) {
+            $result[] = TaskDTO::toDTO($task);
+        }
+
+        return $result;
     }
 
     private function isUserOwner(int $userId, Task $task): bool
