@@ -3,6 +3,7 @@
 namespace App\Task\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Task\Http\Requests\CreateTaskRequest;
 use App\Task\TaskService;
 
 class TaskController extends Controller
@@ -21,7 +22,7 @@ class TaskController extends Controller
 
     }
 
-    public function store()
+    public function store(CreateTaskRequest $createTaskRequest)
     {
 
     }
