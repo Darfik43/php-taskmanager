@@ -35,7 +35,8 @@ class TaskController extends Controller
 
     public function update(UpdateTaskRequest $updateTaskRequest)
     {
-
+        $taskDTO = TaskDTO::make($updateTaskRequest->validated());
+        $this->taskService->update($taskDTO);
     }
 
     public function destroy($id)
