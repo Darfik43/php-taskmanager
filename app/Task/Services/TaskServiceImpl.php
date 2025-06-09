@@ -54,7 +54,6 @@ class TaskServiceImpl implements TaskService
     public function get(int $id, int $userId): TaskDTO
     {
         $task = $this->taskRepository->findById($id);
-        $test = $task->priority;
         if ($task && $this->isUserOwner($userId, $task)) {
             return TaskDTO::toDTO($task);
         } else
