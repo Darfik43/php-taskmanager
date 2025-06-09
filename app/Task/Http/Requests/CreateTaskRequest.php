@@ -24,8 +24,8 @@ class CreateTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'max:50', RussianChars::class],
-            'details' => ['max:100', RussianChars::class],
+            'title' => ['required', 'max:50', ],//RussianChars::class], //TODO здесь падает валидация, не видит метода внутри RussianChars
+            'details' => ['max:100', ],//RussianChars::class],
             'is_completed' => 'required|boolean',
             'priority' => 'required|integer|between:1,4',
             'deadline' => 'date',
