@@ -39,8 +39,8 @@ class TaskController extends Controller
         $this->taskService->update($taskDTO);
     }
 
-    public function destroy($id)
+    public function destroy($id): void
     {
-
+        $this->taskService->delete($id, auth()->id());
     }
 }
