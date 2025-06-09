@@ -33,7 +33,7 @@ class TaskController extends Controller
         $this->taskService->create($taskDTO);
     }
 
-    public function update(UpdateTaskRequest $updateTaskRequest)
+    public function update(UpdateTaskRequest $updateTaskRequest): void
     {
         $taskDTO = TaskDTO::make($updateTaskRequest->validated());
         $this->taskService->update($taskDTO);
