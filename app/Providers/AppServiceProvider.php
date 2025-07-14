@@ -2,22 +2,22 @@
 
 namespace App\Providers;
 
-use App\Repositories\RedisRefreshTokenRepository;
-use App\Repositories\RefreshTokenRepository;
-use App\Repositories\UserRepository;
-use App\Repositories\UserRepositoryImpl;
-use App\Services\AuthService;
-use App\Services\AuthServiceImpl;
-use App\Services\EmailVerificationService;
-use App\Services\EmailVerificationServiceImpl;
-use App\Services\JWTService;
-use App\Services\JWTServiceImpl;
-use App\Services\UserService;
-use App\Services\UserServiceImpl;
+use App\Authentication\Repositories\RedisRefreshTokenRepository;
+use App\Authentication\Repositories\RefreshTokenRepository;
+use App\Authentication\Repositories\UserRepository;
+use App\Authentication\Repositories\UserRepositoryImpl;
+use App\Authentication\Services\AuthService;
+use App\Authentication\Services\AuthServiceImpl;
+use App\Authentication\Services\JWTService;
+use App\Authentication\Services\JWTServiceImpl;
+use App\Authentication\Services\UserService;
+use App\Authentication\Services\UserServiceImpl;
+use App\Email\Services\EmailVerificationService;
+use App\Email\Services\EmailVerificationServiceImpl;
 use App\Task\Repositories\TaskRepository;
 use App\Task\Repositories\TaskRepositoryImpl;
-use App\Task\Services\TaskServiceImpl;
 use App\Task\Services\TaskService;
+use App\Task\Services\TaskServiceImpl;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\EmailController;
-use App\Http\Controllers\UserController;
+use App\Authentication\Http\Controllers\AuthController;
+use App\Authentication\Http\Controllers\UserController;
+use App\Email\Http\Controllers\EmailController;
 use App\Http\Middleware\JwtMiddleware;
 use App\Task\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;

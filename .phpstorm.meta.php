@@ -13,10 +13,10 @@ namespace PHPSTORM_META {
     */
     override(new \Illuminate\Contracts\Container\Container, map([
         '' => '@',
-            'App\Repositories\RefreshTokenRepository' => \App\Repositories\RedisRefreshTokenRepository::class,
-            'App\Repositories\UserRepository' => \App\Repositories\UserRepositoryImpl::class,
-            'App\Services\AuthService' => \App\Services\AuthServiceImpl::class,
-            'App\Services\JWTService' => \App\Services\JWTServiceImpl::class,
+            'App\Repositories\RefreshTokenRepository' => \App\Authentication\Repositories\RedisRefreshTokenRepository::class,
+            'App\Repositories\UserRepository' => \App\Authentication\Repositories\UserRepositoryImpl::class,
+            'App\Services\AuthService' => \App\Authentication\Services\AuthServiceImpl::class,
+            'App\Services\JWTService' => \App\Authentication\Services\JWTServiceImpl::class,
             'Illuminate\Bus\BatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
             'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
@@ -94,10 +94,10 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Container\Container::makeWith(0), map([
         '' => '@',
-            'App\Repositories\RefreshTokenRepository' => \App\Repositories\RedisRefreshTokenRepository::class,
-            'App\Repositories\UserRepository' => \App\Repositories\UserRepositoryImpl::class,
-            'App\Services\AuthService' => \App\Services\AuthServiceImpl::class,
-            'App\Services\JWTService' => \App\Services\JWTServiceImpl::class,
+            'App\Repositories\RefreshTokenRepository' => \App\Authentication\Repositories\RedisRefreshTokenRepository::class,
+            'App\Repositories\UserRepository' => \App\Authentication\Repositories\UserRepositoryImpl::class,
+            'App\Services\AuthService' => \App\Authentication\Services\AuthServiceImpl::class,
+            'App\Services\JWTService' => \App\Authentication\Services\JWTServiceImpl::class,
             'Illuminate\Bus\BatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
             'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
@@ -175,10 +175,10 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Contracts\Container\Container::get(0), map([
         '' => '@',
-            'App\Repositories\RefreshTokenRepository' => \App\Repositories\RedisRefreshTokenRepository::class,
-            'App\Repositories\UserRepository' => \App\Repositories\UserRepositoryImpl::class,
-            'App\Services\AuthService' => \App\Services\AuthServiceImpl::class,
-            'App\Services\JWTService' => \App\Services\JWTServiceImpl::class,
+            'App\Repositories\RefreshTokenRepository' => \App\Authentication\Repositories\RedisRefreshTokenRepository::class,
+            'App\Repositories\UserRepository' => \App\Authentication\Repositories\UserRepositoryImpl::class,
+            'App\Services\AuthService' => \App\Authentication\Services\AuthServiceImpl::class,
+            'App\Services\JWTService' => \App\Authentication\Services\JWTServiceImpl::class,
             'Illuminate\Bus\BatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
             'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
@@ -256,10 +256,10 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Contracts\Container\Container::make(0), map([
         '' => '@',
-            'App\Repositories\RefreshTokenRepository' => \App\Repositories\RedisRefreshTokenRepository::class,
-            'App\Repositories\UserRepository' => \App\Repositories\UserRepositoryImpl::class,
-            'App\Services\AuthService' => \App\Services\AuthServiceImpl::class,
-            'App\Services\JWTService' => \App\Services\JWTServiceImpl::class,
+            'App\Repositories\RefreshTokenRepository' => \App\Authentication\Repositories\RedisRefreshTokenRepository::class,
+            'App\Repositories\UserRepository' => \App\Authentication\Repositories\UserRepositoryImpl::class,
+            'App\Services\AuthService' => \App\Authentication\Services\AuthServiceImpl::class,
+            'App\Services\JWTService' => \App\Authentication\Services\JWTServiceImpl::class,
             'Illuminate\Bus\BatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
             'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
@@ -337,10 +337,10 @@ namespace PHPSTORM_META {
         ]));
     override(\Illuminate\Contracts\Container\Container::makeWith(0), map([
         '' => '@',
-            'App\Repositories\RefreshTokenRepository' => \App\Repositories\RedisRefreshTokenRepository::class,
-            'App\Repositories\UserRepository' => \App\Repositories\UserRepositoryImpl::class,
-            'App\Services\AuthService' => \App\Services\AuthServiceImpl::class,
-            'App\Services\JWTService' => \App\Services\JWTServiceImpl::class,
+            'App\Repositories\RefreshTokenRepository' => \App\Authentication\Repositories\RedisRefreshTokenRepository::class,
+            'App\Repositories\UserRepository' => \App\Authentication\Repositories\UserRepositoryImpl::class,
+            'App\Services\AuthService' => \App\Authentication\Services\AuthServiceImpl::class,
+            'App\Services\JWTService' => \App\Authentication\Services\JWTServiceImpl::class,
             'Illuminate\Bus\BatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
             'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
@@ -418,10 +418,10 @@ namespace PHPSTORM_META {
         ]));
     override(\App::get(0), map([
         '' => '@',
-            'App\Repositories\RefreshTokenRepository' => \App\Repositories\RedisRefreshTokenRepository::class,
-            'App\Repositories\UserRepository' => \App\Repositories\UserRepositoryImpl::class,
-            'App\Services\AuthService' => \App\Services\AuthServiceImpl::class,
-            'App\Services\JWTService' => \App\Services\JWTServiceImpl::class,
+            'App\Repositories\RefreshTokenRepository' => \App\Authentication\Repositories\RedisRefreshTokenRepository::class,
+            'App\Repositories\UserRepository' => \App\Authentication\Repositories\UserRepositoryImpl::class,
+            'App\Services\AuthService' => \App\Authentication\Services\AuthServiceImpl::class,
+            'App\Services\JWTService' => \App\Authentication\Services\JWTServiceImpl::class,
             'Illuminate\Bus\BatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
             'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
@@ -499,10 +499,10 @@ namespace PHPSTORM_META {
         ]));
     override(\App::make(0), map([
         '' => '@',
-            'App\Repositories\RefreshTokenRepository' => \App\Repositories\RedisRefreshTokenRepository::class,
-            'App\Repositories\UserRepository' => \App\Repositories\UserRepositoryImpl::class,
-            'App\Services\AuthService' => \App\Services\AuthServiceImpl::class,
-            'App\Services\JWTService' => \App\Services\JWTServiceImpl::class,
+            'App\Repositories\RefreshTokenRepository' => \App\Authentication\Repositories\RedisRefreshTokenRepository::class,
+            'App\Repositories\UserRepository' => \App\Authentication\Repositories\UserRepositoryImpl::class,
+            'App\Services\AuthService' => \App\Authentication\Services\AuthServiceImpl::class,
+            'App\Services\JWTService' => \App\Authentication\Services\JWTServiceImpl::class,
             'Illuminate\Bus\BatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
             'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
@@ -580,10 +580,10 @@ namespace PHPSTORM_META {
         ]));
     override(\App::makeWith(0), map([
         '' => '@',
-            'App\Repositories\RefreshTokenRepository' => \App\Repositories\RedisRefreshTokenRepository::class,
-            'App\Repositories\UserRepository' => \App\Repositories\UserRepositoryImpl::class,
-            'App\Services\AuthService' => \App\Services\AuthServiceImpl::class,
-            'App\Services\JWTService' => \App\Services\JWTServiceImpl::class,
+            'App\Repositories\RefreshTokenRepository' => \App\Authentication\Repositories\RedisRefreshTokenRepository::class,
+            'App\Repositories\UserRepository' => \App\Authentication\Repositories\UserRepositoryImpl::class,
+            'App\Services\AuthService' => \App\Authentication\Services\AuthServiceImpl::class,
+            'App\Services\JWTService' => \App\Authentication\Services\JWTServiceImpl::class,
             'Illuminate\Bus\BatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
             'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
@@ -661,10 +661,10 @@ namespace PHPSTORM_META {
         ]));
     override(\app(0), map([
         '' => '@',
-            'App\Repositories\RefreshTokenRepository' => \App\Repositories\RedisRefreshTokenRepository::class,
-            'App\Repositories\UserRepository' => \App\Repositories\UserRepositoryImpl::class,
-            'App\Services\AuthService' => \App\Services\AuthServiceImpl::class,
-            'App\Services\JWTService' => \App\Services\JWTServiceImpl::class,
+            'App\Repositories\RefreshTokenRepository' => \App\Authentication\Repositories\RedisRefreshTokenRepository::class,
+            'App\Repositories\UserRepository' => \App\Authentication\Repositories\UserRepositoryImpl::class,
+            'App\Services\AuthService' => \App\Authentication\Services\AuthServiceImpl::class,
+            'App\Services\JWTService' => \App\Authentication\Services\JWTServiceImpl::class,
             'Illuminate\Bus\BatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
             'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
@@ -742,10 +742,10 @@ namespace PHPSTORM_META {
         ]));
     override(\resolve(0), map([
         '' => '@',
-            'App\Repositories\RefreshTokenRepository' => \App\Repositories\RedisRefreshTokenRepository::class,
-            'App\Repositories\UserRepository' => \App\Repositories\UserRepositoryImpl::class,
-            'App\Services\AuthService' => \App\Services\AuthServiceImpl::class,
-            'App\Services\JWTService' => \App\Services\JWTServiceImpl::class,
+            'App\Repositories\RefreshTokenRepository' => \App\Authentication\Repositories\RedisRefreshTokenRepository::class,
+            'App\Repositories\UserRepository' => \App\Authentication\Repositories\UserRepositoryImpl::class,
+            'App\Services\AuthService' => \App\Authentication\Services\AuthServiceImpl::class,
+            'App\Services\JWTService' => \App\Authentication\Services\JWTServiceImpl::class,
             'Illuminate\Bus\BatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
             'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
@@ -823,10 +823,10 @@ namespace PHPSTORM_META {
         ]));
     override(\Psr\Container\ContainerInterface::get(0), map([
         '' => '@',
-            'App\Repositories\RefreshTokenRepository' => \App\Repositories\RedisRefreshTokenRepository::class,
-            'App\Repositories\UserRepository' => \App\Repositories\UserRepositoryImpl::class,
-            'App\Services\AuthService' => \App\Services\AuthServiceImpl::class,
-            'App\Services\JWTService' => \App\Services\JWTServiceImpl::class,
+            'App\Repositories\RefreshTokenRepository' => \App\Authentication\Repositories\RedisRefreshTokenRepository::class,
+            'App\Repositories\UserRepository' => \App\Authentication\Repositories\UserRepositoryImpl::class,
+            'App\Services\AuthService' => \App\Authentication\Services\AuthServiceImpl::class,
+            'App\Services\JWTService' => \App\Authentication\Services\JWTServiceImpl::class,
             'Illuminate\Bus\BatchRepository' => \Illuminate\Bus\DatabaseBatchRepository::class,
             'Illuminate\Contracts\Auth\Access\Gate' => \Illuminate\Auth\Access\Gate::class,
             'Illuminate\Contracts\Broadcasting\Broadcaster' => \Illuminate\Broadcasting\Broadcasters\LogBroadcaster::class,
@@ -904,22 +904,22 @@ namespace PHPSTORM_META {
         ]));
 
     override(\auth()->user(), map([
-        '' => \App\Models\User::class,
+        '' => \App\Authentication\Models\User::class,
     ]));
     override(\Illuminate\Contracts\Auth\Guard::user(), map([
-        '' => \App\Models\User::class,
+        '' => \App\Authentication\Models\User::class,
     ]));
     override(\Illuminate\Support\Facades\Auth::user(), map([
-        '' => \App\Models\User::class,
+        '' => \App\Authentication\Models\User::class,
     ]));
     override(\request()->user(), map([
-        '' => \App\Models\User::class,
+        '' => \App\Authentication\Models\User::class,
     ]));
     override(\Illuminate\Http\Request::user(), map([
-        '' => \App\Models\User::class,
+        '' => \App\Authentication\Models\User::class,
     ]));
     override(\Illuminate\Support\Facades\Request::user(), map([
-        '' => \App\Models\User::class,
+        '' => \App\Authentication\Models\User::class,
     ]));
 
     override(\config(), map([
@@ -2241,7 +2241,7 @@ namespace PHPSTORM_META {
     override(\optional(0), type(0));
 
             registerArgumentsSet('auth', );
-        registerArgumentsSet('configs', 
+        registerArgumentsSet('configs',
 'app.name','app.env','app.debug','app.url','app.frontend_url',
 'app.asset_url','app.timezone','app.locale','app.fallback_locale','app.faker_locale',
 'app.cipher','app.key','app.previous_keys','app.maintenance.driver','app.maintenance.store',
@@ -2327,12 +2327,12 @@ namespace PHPSTORM_META {
 'ide-helper.interfaces','ide-helper.model_camel_case_properties','ide-helper.type_overrides.integer','ide-helper.type_overrides.boolean','ide-helper.include_class_docblocks',
 'ide-helper.force_fqn','ide-helper.use_generics_annotations','ide-helper.additional_relation_types','ide-helper.additional_relation_return_types','ide-helper.enforce_nullable_relationships',
 'ide-helper.post_migrate','ide-helper.macroable_traits','tinker.commands','tinker.alias','tinker.dont_alias',);
-        registerArgumentsSet('middleware', 
+        registerArgumentsSet('middleware',
 'web','api',);
-        registerArgumentsSet('routes', 
+        registerArgumentsSet('routes',
 'users.index','users.store','users.show','users.update','users.destroy',
 'tasks.index','tasks.store','tasks.show','tasks.update','tasks.destroy','storage.local',);
-        registerArgumentsSet('views', 
+        registerArgumentsSet('views',
 'welcome','laravel-exceptions-renderer::components.card','laravel-exceptions-renderer::components.context','laravel-exceptions-renderer::components.editor','laravel-exceptions-renderer::components.header',
 'laravel-exceptions-renderer::components.icons.chevron-down','laravel-exceptions-renderer::components.icons.chevron-up','laravel-exceptions-renderer::components.icons.computer-desktop','laravel-exceptions-renderer::components.icons.moon','laravel-exceptions-renderer::components.icons.sun',
 'laravel-exceptions-renderer::components.layout','laravel-exceptions-renderer::components.navigation','laravel-exceptions-renderer::components.theme-switcher','laravel-exceptions-renderer::components.trace','laravel-exceptions-renderer::components.trace-and-editor',
@@ -2341,7 +2341,7 @@ namespace PHPSTORM_META {
 'laravel-exceptions::minimal','notifications::email','pagination::bootstrap-4','pagination::bootstrap-5','pagination::default',
 'pagination::semantic-ui','pagination::simple-bootstrap-4','pagination::simple-bootstrap-5','pagination::simple-default','pagination::simple-tailwind',
 'pagination::tailwind',);
-        registerArgumentsSet('translations', 
+        registerArgumentsSet('translations',
 'auth.failed','auth.password','auth.throttle','pagination.previous','pagination.next',
 'passwords.reset','passwords.sent','passwords.throttled','passwords.token','passwords.user',
 'validation.accepted','validation.accepted_if','validation.active_url','validation.after','validation.after_or_equal',
@@ -2370,7 +2370,7 @@ namespace PHPSTORM_META {
 'validation.same','validation.size.array','validation.size.file','validation.size.numeric','validation.size.string',
 'validation.starts_with','validation.string','validation.timezone','validation.unique','validation.uploaded',
 'validation.uppercase','validation.url','validation.ulid','validation.uuid','validation.custom.attribute-name.rule-name',);
-        registerArgumentsSet('env', 
+        registerArgumentsSet('env',
 'APP_NAME','APP_ENV','APP_KEY','APP_DEBUG','APP_TIMEZONE',
 'APP_URL','APP_LOCALE','APP_FALLBACK_LOCALE','APP_FAKER_LOCALE','APP_MAINTENANCE_DRIVER',
 'PHP_CLI_SERVER_WORKERS','BCRYPT_ROUNDS','LOG_CHANNEL','LOG_STACK','LOG_DEPRECATIONS_CHANNEL',
@@ -2383,7 +2383,7 @@ namespace PHPSTORM_META {
 'AWS_ACCESS_KEY_ID','AWS_SECRET_ACCESS_KEY','AWS_DEFAULT_REGION','AWS_BUCKET','AWS_USE_PATH_STYLE_ENDPOINT',
 'VITE_APP_NAME','JWT_SECRET','JWT_PASSPHRASE','JWT_ALGO','JWT_REFRESH_TTL',
 'JWT_TTL',);
-        
+
                 expectedArguments(\Illuminate\Support\Facades\Gate::has(), 0, argumentsSet('auth'));
     expectedArguments(\Illuminate\Support\Facades\Gate::allows(), 0, argumentsSet('auth'));
     expectedArguments(\Illuminate\Support\Facades\Gate::denies(), 0, argumentsSet('auth'));
@@ -2447,5 +2447,5 @@ namespace PHPSTORM_META {
                 expectedArguments(\Illuminate\Contracts\Translation\Translator::get(), 0, argumentsSet('translations'));
                 expectedArguments(\env(), 0, argumentsSet('env'));
                 expectedArguments(\Illuminate\Support\Env::get(), 0, argumentsSet('env'));
-            
+
 }

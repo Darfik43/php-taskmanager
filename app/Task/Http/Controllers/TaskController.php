@@ -2,7 +2,7 @@
 
 namespace App\Task\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Authentication\Http\Controllers\Controller;
 use App\Task\Http\Requests\CreateTaskRequest;
 use App\Task\Http\Requests\UpdateTaskRequest;
 use App\Task\Http\Resources\ShortTaskCollection;
