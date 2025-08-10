@@ -6,8 +6,6 @@ use App\Authentication\Exceptions\UserNotFoundException;
 use App\Authentication\Models\User;
 use App\Authentication\Repositories\UserRepository;
 use Illuminate\Auth\Events\Registered;
-use function App\Services\bcrypt;
-use function App\Services\event;
 
 class UserServiceImpl implements UserService
 {
