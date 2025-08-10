@@ -8,8 +8,6 @@ use App\Authentication\Repositories\RefreshTokenRepository;
 use Carbon\Carbon;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use function App\Services\config;
-use function App\Services\now;
 
 class JWTServiceImpl implements JWTService
 {
