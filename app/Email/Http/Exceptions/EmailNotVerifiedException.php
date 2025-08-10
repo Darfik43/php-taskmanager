@@ -4,7 +4,6 @@ namespace App\Email\Http\Exceptions;
 
 use Exception;
 use Illuminate\Http\JsonResponse;
-use function App\Exceptions\response;
 
 class EmailNotVerifiedException extends Exception
 {
