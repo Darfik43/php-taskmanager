@@ -4,11 +4,8 @@ namespace App\Task\Http\Requests;
 
 use App\Task\Rules\RussianChars;
 use Illuminate\Contracts\Validation\ValidationRule;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
-class CreateTaskRequest extends FormRequest
+class CreateTaskRequest extends ApiFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -34,13 +31,4 @@ class CreateTaskRequest extends FormRequest
             'time_spent' => 'numeric',
         ];
     }
-
-
-    //TODO try to use this way to fail validation to avoid redirect to index page
-//    public function failedValidation(Validator $validator)
-//    {
-//        throw new HttpResponseException(response()->json([
-//            'errors' => $validator->errors()
-//        ], 422));
-//    }
 }
