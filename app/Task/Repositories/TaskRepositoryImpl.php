@@ -25,7 +25,7 @@ class TaskRepositoryImpl implements TaskRepository
             $task->user_id,
             $task->title,
             $task->details,
-            $task->priority,
+            $task->priority->value,  // Остановился тут, падает запрос в бд
             $task->is_completed,
             $task->deadline,
             $task->time_spent,
