@@ -8,15 +8,15 @@ use App\Task\Models\Task;
 readonly class TaskDTO
 {
     private function __construct(
-        public int $id,
+        public ?int $id,
         public string $title,
         public string $details,
         public bool $isCompleted,
         public Priority $priority,
-        public \DateTime $deadline,
+        public ?\DateTime $deadline,
         public ?\DateTime $closedAt,
-        public \DateTime $createdAt,
-        public \DateTime $updatedAt,
+        public ?\DateTime $createdAt,
+        public ?\DateTime $updatedAt,
         public ?int $timeSpent,
         public int $userId,
     ) {}
@@ -59,16 +59,18 @@ readonly class TaskDTO
     public static function make(array $data): TaskDTO
     {
         return new TaskDTO(
-            id: $data['id'],
+            id: $data['id'] ?? null,
             title: $data['title'],
             details: $data['details'],
             isCompleted: $data['is_completed'],
-            priority: $data['priority'],
-            deadline: $data['deadline'],
-            closedAt: $data['closed_at'],
-            createdAt: $data['created"at'],
-            updatedAt: $data['updated_at'],
-            timeSpent: $data['time_spent'],
+            priority: $data['priority'] instanceof Priority
+                ? $data['priority']
+                : Priority::from((int) $data['priority']),
+            deadline: $data['deadline'] ?? null,
+            closedAt: $data['closed_at'] ?? null,
+            createdAt: $data['created"at'] ?? null,
+            updatedAt: $data['updated_at'] ?? null,
+            timeSpent: $data['time_spent'] ?? null,
             userId: $data['user_id'],
         );
     }
