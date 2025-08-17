@@ -10,7 +10,6 @@ class TaskRepositoryImpl implements TaskRepository
 
     public function create(Task $task): bool
     {
-//        dd($task->toArray());
         return DB::insert("
             INSERT INTO tasks (user_id,
                                title,
