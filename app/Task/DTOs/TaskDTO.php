@@ -4,6 +4,7 @@ namespace App\Task\DTOs;
 
 use App\Task\Enums\Priority;
 use App\Task\Models\Task;
+use DateTime;
 
 readonly class TaskDTO
 {
@@ -66,7 +67,9 @@ readonly class TaskDTO
             priority: $data['priority'] instanceof Priority
                 ? $data['priority']
                 : Priority::from((int) $data['priority']),
-            deadline: $data['deadline'] ?? null,
+            deadline: isset($data['deadline'])
+                ? new DateTime($data['deadline'])
+                : null,
             closedAt: $data['closed_at'] ?? null,
             createdAt: $data['created"at'] ?? null,
             updatedAt: $data['updated_at'] ?? null,
