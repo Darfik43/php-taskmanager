@@ -10,6 +10,7 @@ class TaskRepositoryImpl implements TaskRepository
 
     public function create(Task $task): bool
     {
+//        dd($task->toArray());
         return DB::insert("
             INSERT INTO tasks (user_id,
                                title,
@@ -19,8 +20,9 @@ class TaskRepositoryImpl implements TaskRepository
                                deadline,
                                time_spent,
                                created_at,
+                               closed_at,
                                updated_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?,?, NOW(), NOW())
+            VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), null, NOW())
         ", [
             $task->user_id,
             $task->title,
