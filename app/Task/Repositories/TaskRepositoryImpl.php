@@ -83,7 +83,7 @@ class TaskRepositoryImpl implements TaskRepository
         return $data ? $this->hydrateTask((array)$data) : null;
     }
 
-    public function findShortAllByUser(int $user_id): array
+    public function findShortAllByUser(int $userId): array
     {
         $results = DB::select("
             SELECT
@@ -94,7 +94,7 @@ class TaskRepositoryImpl implements TaskRepository
             FROM tasks
             WHERE user_id = ?
             ORDER BY created_at DESC
-        ", [$user_id]);
+        ", [$userId]);
 
         $tasks = [];
         foreach($results as $result) {
