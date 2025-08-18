@@ -3,78 +3,35 @@
 namespace App\Task\DTOs;
 
 use App\Task\Enums\Priority;
-use App\Task\Models\Task;
-use DateTime;
+use DateTimeInterface;
 
 readonly class TaskDTO
 {
     private function __construct(
         public ?int $id,
         public string $title,
-        public string $details,
-        public bool $isCompleted,
+        public ?string $details,
         public Priority $priority,
-        public ?\DateTime $deadline,
-        public ?\DateTime $closedAt,
-        public ?\DateTime $createdAt,
-        public ?\DateTime $updatedAt,
-        public ?int $timeSpent,
-        public int $userId,
+        public bool $isCompleted,
+        public ?DateTimeInterface $deadline,
+        public ?int $timeSpent
     ) {}
-
-    // prob methods below should be moved to another class in future to fabric class
-    public static function toDTO(Task $task): TaskDTO
-    {
-        return new TaskDTO(
-            id: $task->id,
-            title: $task->title,
-            details: $task->details,
-            isCompleted: $task->is_completed,
-            priority: $task->priority,
-            deadline: $task->deadline,
-            closedAt: $task->closed_at,
-            createdAt: $task->created_at,
-            updatedAt: $task->updated_at,
-            timeSpent: $task->time_spent,
-            userId: $task->user_id
-        );
-    }
-
-    public static function toModel(TaskDTO $taskDTO): Task
-    {
-        return new Task([
-            'id' => $taskDTO->id,
-            'title' => $taskDTO->title,
-            'details' => $taskDTO->details,
-            'is_completed' => $taskDTO->isCompleted,
-            'priority' => $taskDTO->priority,
-            'deadline' => $taskDTO->deadline,
-            'closed_at' => $taskDTO->closedAt,
-            'created_at' => $taskDTO->createdAt,
-            'updated_at' => $taskDTO->updatedAt,
-            'time_spent' => $taskDTO->timeSpent,
-            'user_id' => $taskDTO->userId
-            ]);
-    }
 
     public static function make(array $data): TaskDTO
     {
         return new TaskDTO(
             id: $data['id'] ?? null,
             title: $data['title'],
-            details: $data['details'],
-            isCompleted: $data['is_completed'],
+            details: $data['details'] ?? null,
             priority: $data['priority'] instanceof Priority
                 ? $data['priority']
                 : Priority::from((int) $data['priority']),
+            isCompleted: (bool) ($data['is_completed'] ?? false),
             deadline: isset($data['deadline'])
-                ? new DateTime($data['deadline'])
+                ? new \DateTimeImmutable($data['deadline'])
                 : null,
-            closedAt: $data['closed_at'] ?? null,
-            createdAt: $data['created"at'] ?? null,
-            updatedAt: $data['updated_at'] ?? null,
             timeSpent: $data['time_spent'] ?? null,
-            userId: $data['user_id'],
         );
     }
 }
+
