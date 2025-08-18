@@ -17,38 +17,37 @@ class TaskController extends Controller
         private readonly TaskService $taskService
     ) {}
 
-    public function index(): ShortTaskCollection
+    public function index(): JsonResponse
     {
-        $result = $this->taskService->getShortAllByUser(auth()->id());
-        return new ShortTaskCollection($result);
+        $tasks = $this->taskService->getAllByUser(auth()->id());
+        return response()->json(TaskResource::collection($tasks));
     }
 
-    public function show(int $id): TaskResource
+    public function show(int $id): JsonResponse
     {
-        return new TaskResource($this->taskService->get($id, auth()->id()));
+        $task = $this->taskService->get($id, auth()->id());
+        return response()->json(new TaskResource($task));
     }
 
-    public function store(CreateTaskRequest $createTaskRequest): JsonResponse
+    public function store(CreateTaskRequest $request): JsonResponse
     {
-        $task = $this->taskService->create(
-            TaskDTO::make($createTaskRequest->validated())
-        );
+        $dto = TaskDTO::make($request->validated());
+        $task = $this->taskService->create(auth()->id(), $dto);
 
         return response()->json(new TaskResource($task), 201);
     }
 
-    public function update(UpdateTaskRequest $updateTaskRequest, int $id): JsonResponse
+    public function update(UpdateTaskRequest $request, int $id): JsonResponse
     {
-        $task = $this->taskService->update(
-            TaskDTO::make($updateTaskRequest->validated()),
-            $id
-        );
+        $dto = TaskDTO::make($request->validated());
+        $task = $this->taskService->update($id, auth()->id(), $dto);
 
         return response()->json(new TaskResource($task));
     }
 
-    public function destroy($id): void
+    public function destroy(int $id): JsonResponse
     {
         $this->taskService->delete($id, auth()->id());
+        return response()->json(null, 204);
     }
 }

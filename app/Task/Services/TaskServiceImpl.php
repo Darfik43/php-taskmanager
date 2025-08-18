@@ -2,82 +2,51 @@
 
 namespace App\Task\Services;
 
-use App\Task\DTOs\ShortTaskDTO;
+
 use App\Task\DTOs\TaskDTO;
-use App\Task\Enums\Priority;
+use App\Task\DTOs\TaskReadDTO;
 use App\Task\Exceptions\TaskNotFoundException;
-use App\Task\Models\Task;
+use App\Task\Mappers\TaskMapper;
 use App\Task\Repositories\TaskRepository;
 
 class TaskServiceImpl implements TaskService
 {
-    public function __construct(
-        private readonly TaskRepository $taskRepository
-    )
+    public function __construct(private readonly TaskRepository $repository) {}
+
+    public function create(int $userId, TaskDTO $dto): TaskReadDTO
     {
+        $task = $this->repository->create($dto, $userId);
+        return TaskMapper::toReadDTO($task);
     }
 
-
-    public function create(TaskDTO $taskDTO): TaskDTO
+    public function update(int $id, int $userId, TaskDTO $dto): TaskReadDTO
     {
-        $task = $this->taskRepository->create(TaskDTO::toModel($taskDTO));
-        return TaskDTO::toDTO($task);
+        $task = $this->repository->findByIdAndUser($id, $userId);
+        if (!$task) throw new TaskNotFoundException("Task not found");
+
+        $updated = $this->repository->update($id, $userId, $dto);
+        return TaskMapper::toReadDTO($updated);
     }
 
-    /**
-     * @throws TaskNotFoundException
-     */
-    public function update(TaskDTO $taskDTO, int $id): TaskDTO
-    {
-        $task = $this->taskRepository->findById($id);
-
-        if (!$task || !$this->isUserOwner($taskDTO->userId, $task)) {
-            throw new TaskNotFoundException("Task not found");
-        }
-
-        $updated = $this->taskRepository->update(TaskDTO::toModel($taskDTO));
-        return TaskDTO::toDTO($updated);
-    }
-
-
-    /**
-     * @throws TaskNotFoundException
-     */
     public function delete(int $id, int $userId): void
     {
-        $task = $this->taskRepository->findById($id);
+        $task = $this->repository->findByIdAndUser($id, $userId);
+        if (!$task) throw new TaskNotFoundException("Task not found");
 
-        $this->isUserOwner($userId, $task)
-            ? $this->taskRepository->delete($id)
-            : throw new TaskNotFoundException("Task not found");
+        $this->repository->delete($id, $userId);
     }
 
-    /**
-     * @throws TaskNotFoundException
-     */
-    public function get(int $id, int $userId): TaskDTO
+    public function get(int $id, int $userId): TaskReadDTO
     {
-        $task = $this->taskRepository->findById($id);
-        if ($task && $this->isUserOwner($userId, $task)) {
-            return TaskDTO::toDTO($task);
-        } else
-            throw new TaskNotFoundException("Task not found");
+        $task = $this->repository->findByIdAndUser($id, $userId);
+        if (!$task) throw new TaskNotFoundException("Task not found");
+
+        return TaskMapper::toReadDTO($task);
     }
 
-    public function getShortAllByUser(int $user_id): array
+    public function getAllByUser(int $userId): array
     {
-        $taskList = $this->taskRepository->findShortAllByUser($user_id);
-
-        $result = [];
-        foreach ($taskList as $task) {
-            $result[] = ShortTaskDTO::toDTO($task);
-        }
-
-        return $result;
-    }
-
-    private function isUserOwner(int $userId, Task $task): bool
-    {
-        return $userId === $task->user_id;
+        $tasks = $this->repository->findAllByUser($userId);
+        return array_map(fn($task) => TaskMapper::toReadDTO($task), $tasks);
     }
 }
