@@ -16,7 +16,7 @@ class TaskRepositoryImpl implements TaskRepository
             'details'     => $dto->details,
             'priority'    => $dto->priority->value,
             'is_completed'=> $dto->isCompleted,
-            'deadline'    => $dto->deadline?->format('Y-m-d H:i:s'),
+            'deadline'    => $dto->deadline?->format('Y-m-d'),
             'time_spent'  => $dto->timeSpent,
             'created_at'  => now(),
             'updated_at'  => now(),
@@ -35,7 +35,7 @@ class TaskRepositoryImpl implements TaskRepository
                 'details'      => $dto->details,
                 'priority'     => $dto->priority->value,
                 'is_completed' => $dto->isCompleted,
-                'deadline'     => $dto->deadline?->format('Y-m-d H:i:s'),
+                'deadline'     => $dto->deadline?->format('Y-m-d'),
                 'time_spent'   => $dto->timeSpent,
                 'updated_at'   => now(),
             ]);
