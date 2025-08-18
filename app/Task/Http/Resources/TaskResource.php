@@ -2,11 +2,12 @@
 
 namespace App\Task\Http\Resources;
 
-use App\Task\DTOs\TaskDTO;
+
+use App\Task\DTOs\TaskReadDTO;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * @mixin TaskDTO
+ * @mixin TaskReadDTO
  */
 class TaskResource extends JsonResource
 {
