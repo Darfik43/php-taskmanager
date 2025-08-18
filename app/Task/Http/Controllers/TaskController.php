@@ -37,9 +37,14 @@ class TaskController extends Controller
         return response()->json(new TaskResource($task), 201);
     }
 
-    public function update(UpdateTaskRequest $updateTaskRequest): void
+    public function update(UpdateTaskRequest $updateTaskRequest, int $id): JsonResponse
     {
-        $this->taskService->update(TaskDTO::make($updateTaskRequest->toArray()));
+        $task = $this->taskService->update(
+            TaskDTO::make($updateTaskRequest->validated()),
+            $id
+        );
+
+        return response()->json(new TaskResource($task));
     }
 
     public function destroy($id): void

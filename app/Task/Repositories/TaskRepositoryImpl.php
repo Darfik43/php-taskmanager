@@ -26,7 +26,7 @@ class TaskRepositoryImpl implements TaskRepository
             $task->user_id,
             $task->title,
             $task->details,
-            $task->priority->value,  // Остановился тут, падает запрос в бд
+            $task->priority->value,
             $task->is_completed,
             $task->deadline,
             $task->time_spent,
@@ -37,9 +37,9 @@ class TaskRepositoryImpl implements TaskRepository
 
     }
 
-    public function update(Task $task): int
+    public function update(Task $task): Task
     {
-        return DB::update("
+        DB::update("
             UPDATE tasks
             SET
                 title = ?,
@@ -59,6 +59,8 @@ class TaskRepositoryImpl implements TaskRepository
             $task->time_spent,
             $task->id
         ]);
+
+        return $this->findById($task->id);
     }
 
     public function delete(int $id): int

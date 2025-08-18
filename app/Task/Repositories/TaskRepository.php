@@ -7,7 +7,7 @@ use App\Task\Models\Task;
 interface TaskRepository
 {
     public function create(Task $task): Task;
-    public function update(Task $task): int;
+    public function update(Task $task): Task;
     public function delete(int $id): int;
     public function findById(int $id): ?Task;
     public function findShortAllByUser(int $user_id): array;
