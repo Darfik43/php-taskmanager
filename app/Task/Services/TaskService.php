@@ -6,7 +6,7 @@ use App\Task\DTOs\TaskDTO;
 
 interface TaskService
 {
-    public function create(TaskDTO $taskDTO): void;
+    public function create(TaskDTO $taskDTO): TaskDTO;
     public function update(TaskDTO $taskDTO): void;
     public function delete(int $id, int $userId): void;
     public function get(int $id, int $userId): TaskDTO;

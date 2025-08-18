@@ -9,6 +9,7 @@ use App\Task\Http\Requests\UpdateTaskRequest;
 use App\Task\Http\Resources\ShortTaskCollection;
 use App\Task\Http\Resources\TaskResource;
 use App\Task\Services\TaskService;
+use Illuminate\Http\JsonResponse;
 
 class TaskController extends Controller
 {
@@ -27,9 +28,13 @@ class TaskController extends Controller
         return new TaskResource($this->taskService->get($id, auth()->id()));
     }
 
-    public function store(CreateTaskRequest $createTaskRequest): void
+    public function store(CreateTaskRequest $createTaskRequest): JsonResponse
     {
-        $this->taskService->create(TaskDTO::make($createTaskRequest->toArray()));
+        $task = $this->taskService->create(
+            TaskDTO::make($createTaskRequest->validated())
+        );
+
+        return response()->json(new TaskResource($task), 201);
     }
 
     public function update(UpdateTaskRequest $updateTaskRequest): void

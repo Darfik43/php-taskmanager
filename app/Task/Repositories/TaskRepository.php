@@ -6,7 +6,7 @@ use App\Task\Models\Task;
 
 interface TaskRepository
 {
-    public function create(Task $task): bool;
+    public function create(Task $task): Task;
     public function update(Task $task): int;
     public function delete(int $id): int;
     public function findById(int $id): ?Task;

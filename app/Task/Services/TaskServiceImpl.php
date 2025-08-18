@@ -18,9 +18,10 @@ class TaskServiceImpl implements TaskService
     }
 
 
-    public function create(TaskDTO $taskDTO): void
+    public function create(TaskDTO $taskDTO): TaskDTO
     {
-        $this->taskRepository->create(TaskDTO::toModel($taskDTO));
+        $task = $this->taskRepository->create(TaskDTO::toModel($taskDTO));
+        return TaskDTO::toDTO($task);
     }
 
     /**

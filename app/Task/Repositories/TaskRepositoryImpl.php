@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\DB;
 class TaskRepositoryImpl implements TaskRepository
 {
 
-    public function create(Task $task): bool
+    public function create(Task $task): Task
     {
-        return DB::insert("
+        DB::insert("
             INSERT INTO tasks (user_id,
                                title,
                                details,
@@ -32,6 +32,8 @@ class TaskRepositoryImpl implements TaskRepository
             $task->time_spent,
         ]);
 
+        $id = DB::getPdo()->lastInsertId();
+        return $this->findById((int) $id);
 
     }
 
