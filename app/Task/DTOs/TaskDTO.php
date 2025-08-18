@@ -11,7 +11,7 @@ readonly class TaskDTO
         public ?int $id,
         public string $title,
         public ?string $details,
-        public Priority $priority,
+        public ?Priority $priority,
         public bool $isCompleted,
         public ?DateTimeInterface $deadline,
         public ?int $timeSpent
@@ -23,9 +23,11 @@ readonly class TaskDTO
             id: $data['id'] ?? null,
             title: $data['title'],
             details: $data['details'] ?? null,
-            priority: $data['priority'] instanceof Priority
+            priority: array_key_exists('priority', $data) && $data['priority'] instanceof Priority
                 ? $data['priority']
-                : Priority::from((int) $data['priority']),
+                : (array_key_exists('priority', $data) && $data['priority'] !== null
+                    ? Priority::from((int)$data['priority'])
+                    : null),
             isCompleted: (bool) ($data['is_completed'] ?? false),
             deadline: isset($data['deadline'])
                 ? new \DateTimeImmutable($data['deadline'])
