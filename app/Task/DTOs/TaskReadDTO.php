@@ -2,6 +2,7 @@
 
 namespace App\Task\DTOs;
 
+use App\Task\Enums\Priority;
 use DateTimeInterface;
 
 readonly class TaskReadDTO
