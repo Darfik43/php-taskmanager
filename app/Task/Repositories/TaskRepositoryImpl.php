@@ -27,19 +27,30 @@ class TaskRepositoryImpl implements TaskRepository
 
     public function update(int $id, int $userId, TaskDTO $dto): Task
     {
+        $updateData = [
+            'title'        => $dto->title,
+            'details'      => $dto->details,
+            'is_completed' => $dto->isCompleted,
+            'updated_at'   => now(),
+        ];
+
+        if ($dto->priority !== null || array_key_exists('priority', $data)) {
+            $updateData['priority'] = $dto->priority?->value;
+        }
+
+        if (array_key_exists('deadline', $data)) {
+            $updateData['deadline'] = $dto->deadline?->format('Y-m-d');
+        }
+
+        if (array_key_exists('time_spent', $data)) {
+            $updateData['time_spent'] = $dto->timeSpent;
+        }
+
         DB::table('tasks')
             ->where('id', $id)
             ->where('user_id', $userId)
-            ->update([
-                'title'        => $dto->title,
-                'details'      => $dto->details,
-                'priority'     => $dto->priority->value,
-                'is_completed' => $dto->isCompleted,
-                'deadline'     => $dto->deadline?->format('Y-m-d'),
-                'time_spent'   => $dto->timeSpent,
-                'updated_at'   => now(),
-            ]);
-
+            ->update($updateData);
+//Нужна новая логика апдейта в бд, чтобы в этом кейсе мы могли обрабатывать налл значения и не перезаписывать ими уже существующие
         return $this->findByIdAndUser($id, $userId);
     }
 
