@@ -23,12 +23,12 @@ class UpdateTaskRequest extends ApiFormRequest
     public function rules(): array
     {
         return [
-            'title' => ['max:50', new RussianChars()],
-            'details' => ['max:100', new RussianChars()],
+            'title' => ['required', 'max:50', new RussianChars()],
+            'details' => ['required', 'max:100', new RussianChars()],
             'is_completed' => 'required|boolean',
-            'priority' => 'integer|between:1,4',
-            'deadline' => 'date',
-            'time_spent' => 'numeric',
+            'priority' => 'required|integer|between:1,4',
+            'deadline' => 'required|date',
+            'time_spent' => 'required|numeric',
         ];
     }
 }
