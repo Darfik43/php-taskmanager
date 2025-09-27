@@ -22,17 +22,15 @@ readonly class TaskDTO
         return new TaskDTO(
             id: $data['id'] ?? null,
             title: $data['title'] ?? null,
-            details: array_key_exists('details', $data) ? $data['details'] : null,
-            priority: array_key_exists('priority', $data) && $data['priority'] instanceof Priority
+            details: $data['details'] ?? null,
+            priority: $data['priority'] instanceof Priority
                 ? $data['priority']
                 : (array_key_exists('priority', $data) && $data['priority'] !== null
                     ? Priority::from((int)$data['priority'])
                     : null),
             isCompleted: (bool) ($data['is_completed'] ?? false),
-            deadline: array_key_exists('deadline', $data)
-                ? ($data['deadline'] ? new \DateTimeImmutable($data['deadline']) : null)
-                : null,
-            timeSpent: array_key_exists('time_spent', $data) ? $data['time_spent'] : null
+            deadline: $data['deadline'] ? new \DateTimeImmutable($data['deadline']) : null,
+            timeSpent: $data['time_spent'] ?? null
         );
     }
 }
