@@ -17,6 +17,9 @@ readonly class TaskDTO
         public ?int $timeSpent
     ) {}
 
+    /**
+     * @throws \Exception
+     */
     public static function make(array $data): TaskDTO
     {
         return new TaskDTO(

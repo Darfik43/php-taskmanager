@@ -19,6 +19,9 @@ class TaskServiceImpl implements TaskService
         return TaskMapper::toReadDTO($task);
     }
 
+    /**
+     * @throws TaskNotFoundException
+     */
     public function update(int $id, int $userId, TaskDTO $dto): TaskReadDTO
     {
         $task = $this->repository->findByIdAndUser($id, $userId);
@@ -28,6 +31,9 @@ class TaskServiceImpl implements TaskService
         return TaskMapper::toReadDTO($updated);
     }
 
+    /**
+     * @throws TaskNotFoundException
+     */
     public function delete(int $id, int $userId): void
     {
         $task = $this->repository->findByIdAndUser($id, $userId);
@@ -36,6 +42,9 @@ class TaskServiceImpl implements TaskService
         $this->repository->delete($id, $userId);
     }
 
+    /**
+     * @throws TaskNotFoundException
+     */
     public function get(int $id, int $userId): TaskReadDTO
     {
         $task = $this->repository->findByIdAndUser($id, $userId);
