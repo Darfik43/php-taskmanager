@@ -39,7 +39,6 @@ class TaskController extends Controller
 
     public function update(UpdateTaskRequest $request, int $id): JsonResponse
     {
-        dd($request);
         $dto = TaskDTO::make($request->validated());
         $task = $this->taskService->update($id, auth()->id(), $dto);
 
