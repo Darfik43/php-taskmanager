@@ -12,4 +12,5 @@ interface TaskService
     public function delete(int $id, int $userId): void;
     public function get(int $id, int $userId): TaskReadDTO;
     public function getAllByUser(int $user_id): array;
+    public function getAllIncompleteByUser(int $userId): array;
 }

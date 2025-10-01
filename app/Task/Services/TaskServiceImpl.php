@@ -58,4 +58,11 @@ class TaskServiceImpl implements TaskService
         $tasks = $this->repository->findAllByUser($userId);
         return array_map(fn($task) => TaskMapper::toReadDTO($task), $tasks);
     }
+
+    public function getAllIncompleteByUser(int $userId): array
+    {
+        $tasks = $this->repository->findAllIncompleteByUser($userId);
+
+        return $tasks;
+    }
 }
