@@ -12,4 +12,5 @@ interface TaskRepository
     public function delete(int $id, int $userId): void;
     public function findAllByUser(int $userId): array;
     public function findByIdAndUser(int $id, int $userId): ?Task;
+    public function findAllIncompleteByUser(int $userId): array;
 }

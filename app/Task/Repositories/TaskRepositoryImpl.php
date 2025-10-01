@@ -76,6 +76,22 @@ class TaskRepositoryImpl implements TaskRepository
         return $tasks;
     }
 
+    public function findAllIncompleteByUser(int $userId): array
+    {
+        $results = DB::table('tasks')
+            ->where('user_id', $userId)
+            ->where('is_completed', false)
+            ->orderByDesc('id')
+            ->get();
+
+        $tasks = [];
+        foreach ($results as $result) {
+            $tasks[] = $this->hydrateTask((array)$result);
+        }
+
+        return $tasks;
+    }
+
     private function hydrateTask(array $data): Task
     {
         $task = new Task();
