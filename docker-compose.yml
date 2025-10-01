@@ -1,31 +1,41 @@
+version: "3.9"
+
 services:
     app:
         build: .
+        container_name: laravel-app
         ports:
             - "8000:80"
-#        volumes:
-#            - .:/var/www/html
+        volumes:
+            - .:/var/www/html
+            - /var/www/html/vendor
         depends_on:
-            - redis
             - postgres
+            - redis
+            - kafka
         env_file:
-            -   .env
+            - .env
         environment:
             - DB_HOST=postgres
             - DB_PORT=5432
             - REDIS_HOST=redis
+            - KAFKA_BROKER=kafka:9092
+        networks:
+            - laravel-net
         command: >
             bash -c "
             while ! nc -z postgres 5432; do
               echo 'Waiting for PostgreSQL...';
               sleep 1;
             done;
+            composer install;
             php artisan migrate --force;
             apache2-foreground
             "
 
     postgres:
         image: postgres:15
+        container_name: postgres
         environment:
             - POSTGRES_DB=${DB_DATABASE}
             - POSTGRES_USER=${DB_USERNAME}
@@ -34,11 +44,40 @@ services:
             - postgres_data:/var/lib/postgresql/data
         ports:
             - "5432:5432"
+        networks:
+            - laravel-net
 
     redis:
         image: redis:7
+        container_name: redis
         ports:
             - "6379:6379"
+        networks:
+            - laravel-net
+
+    kafka:
+        image: apache/kafka:3.7.0
+        container_name: kafka
+        ports:
+            - "9092:9092"
+            - "29092:29092"
+        environment:
+            KAFKA_BROKER_ID: 1
+            KAFKA_PROCESS_ROLES: broker,controller
+            KAFKA_NODE_ID: 1
+            KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
+            KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+            KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT
+            KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+            KAFKA_CONTROLLER_QUORUM_VOTERS: 1@localhost:9093
+            KAFKA_CLUSTER_ID: abcd1234abcd1234abcd1234abcd1234
+            KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+        networks:
+            - laravel-net
 
 volumes:
     postgres_data:
+
+networks:
+    laravel-net:
+        driver: bridge
