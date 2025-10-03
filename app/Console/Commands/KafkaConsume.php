@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Email\Services\TaskNotificationService;
 use Illuminate\Console\Command;
 use RdKafka\KafkaConsumer;
-use App\Notification\Services\TaskNotificationService;
 
 class KafkaConsume extends Command
 {
