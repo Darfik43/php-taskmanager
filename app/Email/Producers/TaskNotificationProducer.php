@@ -4,7 +4,7 @@ namespace App\Email\Producers;
 
 use RdKafka\Producer;
 
-class TaskNotifiicationProducer
+class TaskNotificationProducer
 {
     private Producer $producer;
     private \RdKafka\Topic $topic;
@@ -13,7 +13,7 @@ class TaskNotifiicationProducer
     {
         $conf = new \RdKafka\Conf();
         $this->producer = new Producer($conf);
-        $this->producer->addBrokeers(env('KAFKA_BROKER'));
+        $this->producer->addBrokers(env('KAFKA_BROKER'));
         $this->topic = $this->producer->newTopic('user_task_notifications');
     }
 
