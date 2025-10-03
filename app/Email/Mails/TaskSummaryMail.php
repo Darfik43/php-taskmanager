@@ -18,6 +18,6 @@ class TaskSummaryMail extends Mailable
     public function build(): TaskSummaryMail
     {
         return $this->subject("Your Task Summary")
-            ->view('emails.task_summary');
+            ->view('mails.task_summary');
     }
 }
