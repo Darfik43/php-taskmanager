@@ -22,3 +22,5 @@ Route::prefix('email')->group(function() {
 Route::middleware([JwtMiddleware::class])->group(function () {
    Route::apiResource('tasks', TaskController::class);
 });
+
+Route::post('/test/{id}', [\App\Http\Controllers\TestController::class, 'test']);
