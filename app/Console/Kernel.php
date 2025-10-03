@@ -16,7 +16,7 @@ class Kernel extends ConsoleKernel
             foreach ($users as $user) {
                 $producer->send($user->id);
             }
-        })->hourly();
+        })->dailyAt('20:25');
     }
 
     protected function commands(): void
