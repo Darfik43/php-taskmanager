@@ -12,6 +12,7 @@ class TaskNotificationProducer
     public function __construct()
     {
         $conf = new \RdKafka\Conf();
+        $conf->set('bootstrap.servers', env('KAFKA_BROKER'));
         $this->producer = new Producer($conf);
         $this->producer->addBrokers(env('KAFKA_BROKER'));
         $this->topic = $this->producer->newTopic('user_task_notifications');
